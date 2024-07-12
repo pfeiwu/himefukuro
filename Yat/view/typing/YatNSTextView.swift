@@ -9,17 +9,19 @@ import Foundation
 import AppKit
  class YatNSTextView: NSTextView {
     
-   
-    
-    // let parent to delegate the key down event.
+    // for delegate
     override func keyDown(with event: NSEvent){
-//        parent.keyDown(with: event)
-//        super.keyDown(with: event)
+        if let delegate = self.delegate as? TypingView.Coordinator{
+            delegate.keyDown(with: event)
+        }
+        super.keyDown(with: event)
     }
     
-    // let parent to delegate the paste event
+    // for delegate
     override func paste(_ sender: Any?){
-//        parent.paste(sender)
+        if let delegate = self.delegate as? TypingView.Coordinator{
+            delegate.paste(sender)
+        }
         // do not need to trigger the original paste method here.
     }
 }

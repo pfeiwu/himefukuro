@@ -55,7 +55,7 @@ class Article {
     public func activate() {
         isActive = true
     }
-    public func inactivate() {
+    public func deactivate() {
         isActive = false
     }
     public func toggle() {

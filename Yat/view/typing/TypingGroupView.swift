@@ -39,7 +39,8 @@ struct TypingGroupView: View {
         VStack(spacing: 0){
             ArticleView(currentArticle: currentArticle, currentRecord: currentRecord)
                 .padding()
-            TypingView(currentRecord: currentRecord)
+            TypingView(currentArticle: currentArticle, currentRecord: currentRecord)
+                .padding()
         }
     }
 }

@@ -23,6 +23,7 @@
 		A01D5E772C412BB3007E9836 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D5E762C412BB3007E9836 /* Record.swift */; };
 		A01D5E7D2C414015007E9836 /* YatNSTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D5E7C2C414015007E9836 /* YatNSTextView.swift */; };
 		A01D5E852C417B4D007E9836 /* Activable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D5E842C417B4D007E9836 /* Activable.swift */; };
+		A01D5E872C4187A8007E9836 /* ArticleUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D5E862C4187A8007E9836 /* ArticleUtil.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		A01D5E762C412BB3007E9836 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		A01D5E7C2C414015007E9836 /* YatNSTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YatNSTextView.swift; sourceTree = "<group>"; };
 		A01D5E842C417B4D007E9836 /* Activable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activable.swift; sourceTree = "<group>"; };
+		A01D5E862C4187A8007E9836 /* ArticleUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleUtil.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +175,7 @@
 		A01D5E682C412493007E9836 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				A01D5E862C4187A8007E9836 /* ArticleUtil.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				A01D5E772C412BB3007E9836 /* Record.swift in Sources */,
 				A01D5E6F2C41251F007E9836 /* ArticleView.swift in Sources */,
 				A01D5E732C4125AB007E9836 /* SpeedometerView.swift in Sources */,
+				A01D5E872C4187A8007E9836 /* ArticleUtil.swift in Sources */,
 				A01D5E752C412B56007E9836 /* Article.swift in Sources */,
 				A01D5E3A2C41221A007E9836 /* YatApp.swift in Sources */,
 				A01D5E7D2C414015007E9836 /* YatNSTextView.swift in Sources */,

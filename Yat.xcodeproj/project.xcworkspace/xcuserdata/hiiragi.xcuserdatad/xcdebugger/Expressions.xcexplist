@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "ArticleView.formattedText.getter:ArticleView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "TypingData.article.getter:@__swiftmacro_3Yat10TypingDataC7article18_PersistedPropertyfMa_.swift">
+      </ContextState>
+      <ContextState
+         contextName = "TypingData.init(article:userInput:):TypingData.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "article.title">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

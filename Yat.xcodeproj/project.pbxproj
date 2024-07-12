@@ -8,13 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		A01D5E3A2C41221A007E9836 /* YatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D5E392C41221A007E9836 /* YatApp.swift */; };
-		A01D5E3C2C41221A007E9836 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D5E3B2C41221A007E9836 /* ContentView.swift */; };
-		A01D5E3E2C41221A007E9836 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D5E3D2C41221A007E9836 /* Item.swift */; };
+		A01D5E3C2C41221A007E9836 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D5E3B2C41221A007E9836 /* MainView.swift */; };
 		A01D5E402C41221C007E9836 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A01D5E3F2C41221C007E9836 /* Assets.xcassets */; };
 		A01D5E432C41221C007E9836 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A01D5E422C41221C007E9836 /* Preview Assets.xcassets */; };
 		A01D5E4E2C41221C007E9836 /* YatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D5E4D2C41221C007E9836 /* YatTests.swift */; };
 		A01D5E582C41221C007E9836 /* YatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D5E572C41221C007E9836 /* YatUITests.swift */; };
 		A01D5E5A2C41221C007E9836 /* YatUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D5E592C41221C007E9836 /* YatUITestsLaunchTests.swift */; };
+		A01D5E6A2C4124A5007E9836 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D5E692C4124A5007E9836 /* SettingView.swift */; };
+		A01D5E6C2C4124E9007E9836 /* TypingGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D5E6B2C4124E9007E9836 /* TypingGroupView.swift */; };
+		A01D5E6F2C41251F007E9836 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D5E6E2C41251F007E9836 /* ArticleView.swift */; };
+		A01D5E712C41252D007E9836 /* TypingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D5E702C41252D007E9836 /* TypingView.swift */; };
+		A01D5E732C4125AB007E9836 /* SpeedometerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D5E722C4125AB007E9836 /* SpeedometerView.swift */; };
+		A01D5E752C412B56007E9836 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D5E742C412B56007E9836 /* Article.swift */; };
+		A01D5E772C412BB3007E9836 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D5E762C412BB3007E9836 /* Record.swift */; };
+		A01D5E7D2C414015007E9836 /* YatNSTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D5E7C2C414015007E9836 /* YatNSTextView.swift */; };
+		A01D5E852C417B4D007E9836 /* Activable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D5E842C417B4D007E9836 /* Activable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,8 +45,7 @@
 /* Begin PBXFileReference section */
 		A01D5E362C41221A007E9836 /* Yat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01D5E392C41221A007E9836 /* YatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YatApp.swift; sourceTree = "<group>"; };
-		A01D5E3B2C41221A007E9836 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		A01D5E3D2C41221A007E9836 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		A01D5E3B2C41221A007E9836 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		A01D5E3F2C41221C007E9836 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A01D5E422C41221C007E9836 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A01D5E442C41221C007E9836 /* Yat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Yat.entitlements; sourceTree = "<group>"; };
@@ -47,6 +54,15 @@
 		A01D5E532C41221C007E9836 /* YatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01D5E572C41221C007E9836 /* YatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YatUITests.swift; sourceTree = "<group>"; };
 		A01D5E592C41221C007E9836 /* YatUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YatUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A01D5E692C4124A5007E9836 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		A01D5E6B2C4124E9007E9836 /* TypingGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingGroupView.swift; sourceTree = "<group>"; };
+		A01D5E6E2C41251F007E9836 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
+		A01D5E702C41252D007E9836 /* TypingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingView.swift; sourceTree = "<group>"; };
+		A01D5E722C4125AB007E9836 /* SpeedometerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedometerView.swift; sourceTree = "<group>"; };
+		A01D5E742C412B56007E9836 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		A01D5E762C412BB3007E9836 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		A01D5E7C2C414015007E9836 /* YatNSTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YatNSTextView.swift; sourceTree = "<group>"; };
+		A01D5E842C417B4D007E9836 /* Activable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,9 +113,11 @@
 		A01D5E382C41221A007E9836 /* Yat */ = {
 			isa = PBXGroup;
 			children = (
+				A01D5E802C414B1D007E9836 /* misc */,
+				A01D5E682C412493007E9836 /* util */,
+				A01D5E672C41248A007E9836 /* model */,
+				A01D5E662C412484007E9836 /* view */,
 				A01D5E392C41221A007E9836 /* YatApp.swift */,
-				A01D5E3B2C41221A007E9836 /* ContentView.swift */,
-				A01D5E3D2C41221A007E9836 /* Item.swift */,
 				A01D5E3F2C41221C007E9836 /* Assets.xcassets */,
 				A01D5E442C41221C007E9836 /* Yat.entitlements */,
 				A01D5E412C41221C007E9836 /* Preview Content */,
@@ -130,6 +148,52 @@
 				A01D5E592C41221C007E9836 /* YatUITestsLaunchTests.swift */,
 			);
 			path = YatUITests;
+			sourceTree = "<group>";
+		};
+		A01D5E662C412484007E9836 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				A01D5E6D2C4124F0007E9836 /* typing */,
+				A01D5E3B2C41221A007E9836 /* MainView.swift */,
+				A01D5E692C4124A5007E9836 /* SettingView.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		A01D5E672C41248A007E9836 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				A01D5E742C412B56007E9836 /* Article.swift */,
+				A01D5E762C412BB3007E9836 /* Record.swift */,
+				A01D5E842C417B4D007E9836 /* Activable.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		A01D5E682C412493007E9836 /* util */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+		A01D5E6D2C4124F0007E9836 /* typing */ = {
+			isa = PBXGroup;
+			children = (
+				A01D5E6B2C4124E9007E9836 /* TypingGroupView.swift */,
+				A01D5E6E2C41251F007E9836 /* ArticleView.swift */,
+				A01D5E702C41252D007E9836 /* TypingView.swift */,
+				A01D5E722C4125AB007E9836 /* SpeedometerView.swift */,
+				A01D5E7C2C414015007E9836 /* YatNSTextView.swift */,
+			);
+			path = typing;
+			sourceTree = "<group>";
+		};
+		A01D5E802C414B1D007E9836 /* misc */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = misc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,9 +326,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A01D5E3C2C41221A007E9836 /* ContentView.swift in Sources */,
-				A01D5E3E2C41221A007E9836 /* Item.swift in Sources */,
+				A01D5E6A2C4124A5007E9836 /* SettingView.swift in Sources */,
+				A01D5E852C417B4D007E9836 /* Activable.swift in Sources */,
+				A01D5E3C2C41221A007E9836 /* MainView.swift in Sources */,
+				A01D5E772C412BB3007E9836 /* Record.swift in Sources */,
+				A01D5E6F2C41251F007E9836 /* ArticleView.swift in Sources */,
+				A01D5E732C4125AB007E9836 /* SpeedometerView.swift in Sources */,
+				A01D5E752C412B56007E9836 /* Article.swift in Sources */,
 				A01D5E3A2C41221A007E9836 /* YatApp.swift in Sources */,
+				A01D5E7D2C414015007E9836 /* YatNSTextView.swift in Sources */,
+				A01D5E6C2C4124E9007E9836 /* TypingGroupView.swift in Sources */,
+				A01D5E712C41252D007E9836 /* TypingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +503,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Yat/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Himefukurou;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -457,6 +530,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Yat/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Himefukurou;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

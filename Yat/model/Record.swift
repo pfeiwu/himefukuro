@@ -14,27 +14,33 @@ class Record {
     var timestamp: Date
     
     // time consumed in seconds
-    var timeConsumedInSec: Int
+    var timeConsumedInSec: Double
     
     // the article that was typed
-    @Relationship(inverse: \Article.records) var article: Article
+    @Relationship() var article: Article
     
     // the input code from user in raw, _ for space, ⌫ for backspace
     var inputCode: String
     
-    // the input char from user, but record revision as '⌫' while keeping the deleted char
-    var inputChar: [String]
+    var realInput: String
+    
+    var wordCount: Int = 0
+    
+    // AKA 回改
+    var revision: Int = 0
+    
+
     
     // AKA 速度
     var characterPerMin: Double {
         guard timeConsumedInSec > 0 else { return 0 }
-        return Double(contentLength) / Double(timeConsumedInSec) * 60
+        return Double(realInput.count) / Double(timeConsumedInSec) * 60
     }
     
     // AKA 码长
     var averageCodeLength: Double {
         guard timeConsumedInSec > 0 else { return 0 }
-        return Double(keystrokeTotal) / Double(contentLength)
+        return Double(keystrokeTotal) / Double(realInput.count)
     }
     
     // AKA 击键
@@ -45,7 +51,7 @@ class Record {
     
     // AKA 打词率
     var wordRate: Double {
-        return Double(inputChar.filter{$0.count > 1}.count) / Double(contentLength) * 100
+        return Double(wordCount) / Double(inputCode.count) * 100
     }
     
     // AKA 字数
@@ -63,27 +69,20 @@ class Record {
         return inputCode.filter { $0 == "⌫" }.count
     }
     
-    // AKA 回改
-    var revision: Int {
-        return inputChar.filter{$0.contains("⌫")}.count
-    }
-    
-    var realInput: String
+  
     
     
     init(
         timestamp: Date = Date(),
-        timeConsumedInSec: Int = 0,
+        timeConsumedInSec: Double = 0.0,
         article: Article,
         inputCode: String = "",
-        inputChar: [String] = [],
         realInput: String = ""
     ) {
         self.article = article
         self.timeConsumedInSec = timeConsumedInSec
         self.timestamp = timestamp
         self.inputCode = inputCode
-        self.inputChar = inputChar
         self.realInput = realInput
     }
     
@@ -92,16 +91,10 @@ class Record {
     }
     
     
-    public func addChar(char: String) {
-        inputChar.append(char)
-        if(char == "⌫" && !realInput.isEmpty){
-            realInput.removeLast()
-        }
-    }
-    
     public func stringify() -> String {
-        let timeFormatted = String(format: "%02d:%02d.%03d", timeConsumedInSec / 60, timeConsumedInSec % 60, (Int(Double(timeConsumedInSec) * 1000) % 1000))
-        return "第\(article.paraNum)段 速度\(String(format: "%.2f", characterPerMin)) 击键\(String(format: "%.2f", keystrokePerSec)) 码长\(String(format: "%.2f", averageCodeLength)) 字数\(contentLength) 时间\(timeFormatted) 回改\(revision) 退格\(backspace) 打词\(String(format: "%.2f", wordRate))% yat v0.1a"
+        // (mm:ss)
+        let timeFormatted = String(format: "%02d:%02d", Int(timeConsumedInSec) / 60, Int(timeConsumedInSec) % 60)
+         return "第\(article.paraNum)段 速度\(String(format: "%.2f", characterPerMin)) 击键\(String(format: "%.2f", keystrokePerSec)) 码长\(String(format: "%.2f", averageCodeLength)) 字数\(contentLength) 时间\(timeFormatted) 回改\(revision) 退格\(backspace) 打词\(String(format: "%.2f", wordRate))% yat v0.1a"
     }
     
     public var isActive: Bool = false

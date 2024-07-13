@@ -13,7 +13,7 @@ class Article {
     
     // when the article was recognized
     var timestamp: Date
-    
+
     // the content of the article
     @Attribute(.externalStorage) var content: String
     
@@ -24,7 +24,7 @@ class Article {
     var paraNum: Int
     
     // the typing records of this article
-    @Relationship var records: [Record] = []
+    @Relationship(deleteRule: .cascade, inverse: \Record.article) var records: [Record] = []
     
     // hash of the content
     var contentHash: Int {

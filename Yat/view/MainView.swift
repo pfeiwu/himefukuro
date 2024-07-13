@@ -10,6 +10,7 @@ import SwiftData
 
 struct MainView: View {
     @Environment(\.modelContext) private var modelContext
+   
     var body: some View {
         VStack {
             TypingGroupView()

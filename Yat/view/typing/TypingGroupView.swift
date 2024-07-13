@@ -12,7 +12,7 @@ import SwiftData
 
 struct TypingGroupView: View {
     
-    @Environment(\.modelContext) private var context
+    @Environment(\.modelContext) private var modelContext
     
     @Query(
         filter: #Predicate<Article> { $0.isActive == true },
@@ -29,7 +29,14 @@ struct TypingGroupView: View {
     }
     
     private var currentRecord: Record {
-        activeRecords.last ?? Record(article:self.currentArticle)
+        if let record = activeRecords.last {
+            return record
+        }
+        let newRecord = Record(article: currentArticle)
+        newRecord.activate()
+//        currentArticle.records.append(newRecord)
+        modelContext.insert(newRecord)
+        return newRecord
     }
     
     
@@ -39,8 +46,11 @@ struct TypingGroupView: View {
         VStack(spacing: 0){
             ArticleView(currentArticle: currentArticle, currentRecord: currentRecord)
                 .padding()
+            SpeedometerleView(currentRecord: currentRecord)
             TypingView(currentArticle: currentArticle, currentRecord: currentRecord)
                 .padding()
+            
+            
         }
     }
 }

@@ -507,7 +507,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Yat/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = Himefukurou;
+				INFOPLIST_KEY_CFBundleDisplayName = "鸺鹠";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -534,7 +534,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Yat/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = Himefukurou;
+				INFOPLIST_KEY_CFBundleDisplayName = "鸺鹠";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

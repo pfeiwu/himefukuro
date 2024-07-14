@@ -14,6 +14,8 @@ struct TypingGroupView: View {
     
     @Environment(\.modelContext) private var modelContext
     
+    @Environment(AttributeContainer.self) private var attributeCon
+    
     @Query(
         filter: #Predicate<Article> { $0.isActive == true },
         sort: \Article.timestamp,
@@ -26,18 +28,22 @@ struct TypingGroupView: View {
     
     @State private var typingState: TypingState = .ready
     
+    
     var body: some View {
         VStack(spacing: 0) {
             ArticleView()
                 .environment(currentRecord)
                 .environment(currentArticleCon)
+                .environment(attributeCon)
                 .padding()
-            SpeedometerleView()
+            SpeedometerView()
                 .environment(currentRecord)
                 .environment(currentArticleCon)
+                .environment(attributeCon)
             TypingView()
                 .environment(currentRecord)
                 .environment(currentArticleCon)
+                .environment(attributeCon)
                 .padding()
         }
         .onChange(of: activeArticles){
@@ -53,15 +59,13 @@ struct TypingGroupView: View {
                 currentRecord.reset()
             }
         }
+        .onChange(of:typingState){
+            print("typingState变为\(typingState)")
+        }
     }
 }
 
 
 
-enum TypingState {
-    case ready
-    case typing
-    case pause
-    case finished
-}
+
 

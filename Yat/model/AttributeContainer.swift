@@ -6,3 +6,17 @@
 //
 
 import Foundation
+import SwiftUI
+
+@Observable
+class AttributeContainer {
+    public var state:TypingState = .ready
+    
+}
+
+enum TypingState {
+    case ready
+    case typing
+    case pause
+    case finished
+}

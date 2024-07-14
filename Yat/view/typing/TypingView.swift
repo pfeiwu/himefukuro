@@ -15,6 +15,8 @@ struct TypingView: NSViewRepresentable {
     
     @Environment(Record.self) private var currentRecord: Record
     
+    @Environment(AttributeContainer.self) private var attributeCon: AttributeContainer
+    
     private var currentArticle: Article {
         currentArticleCon.article
     }
@@ -39,6 +41,17 @@ struct TypingView: NSViewRepresentable {
         currentRecord.realInput = getConfirmedText(from: nsView)
         print("realInput: \(currentRecord.realInput)")
         print(RecordUtil.genRecordStr(record: currentRecord, article: currentArticle))
+        
+        // 当用户输入长度和文章长度相同且最后一个字符相同时，判断输入结束
+        if currentRecord.realInput.count == currentArticle.content.count {
+            if currentRecord.realInput.last == currentArticle.content.last {
+                attributeCon.state = .finished
+                // 将成绩放到剪贴板
+                let recordStr = RecordUtil.genRecordStr(record: currentRecord, article: currentArticle)
+                NSPasteboard.general.clearContents()
+                NSPasteboard.general.setString(recordStr, forType: .string)
+            }
+        }
     }
     
     
@@ -63,6 +76,14 @@ struct TypingView: NSViewRepresentable {
     }
     
     public func keyDown(with event: NSEvent){
+        switch attributeCon.state {
+            case .finished:
+            return
+            case .pause, .ready:
+            attributeCon.state = .typing
+            case .typing:
+            break
+        }
         print("keyDown: \(event.keyCode)")
         if let characters = event.characters {
             var convertedCode = "☒"
@@ -75,7 +96,6 @@ struct TypingView: NSViewRepresentable {
             }
             currentRecord.addKeystroke(key: convertedCode)
             print("convertedCode：\(convertedCode), keystrokes: \(currentRecord.inputCode)")
-            
         }
     }
     public func paste(_ sender: Any?){
@@ -94,6 +114,7 @@ struct TypingView: NSViewRepresentable {
             //  newArticle.records.append(newRecord)
             modelContext.insert(newArticle)
             nsView.string=""
+            attributeCon.state = .ready
         }
     }
     

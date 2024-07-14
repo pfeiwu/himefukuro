@@ -15,6 +15,8 @@ struct ArticleView: View {
     
     @Environment(Record.self) private var currentRecord: Record
     
+    @Environment(AttributeContainer.self) private var attributeCon
+    
     private var currentArticle: Article {
         currentArticleCon.article
     }

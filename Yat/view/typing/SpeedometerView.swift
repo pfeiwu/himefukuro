@@ -15,11 +15,12 @@ struct SpeedometerleView: View {
     @State private var timer: Timer?
     var body: some View {
         VStack {
-            Text(self.currentRecord.stringify())
+            Text("速度：\(currentRecord.characterPerMin)")
         }
         .onAppear(perform: {
+            print("speedometer正在使用的record是\(currentRecord.id)")
             self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
-                self.currentRecord.timeConsumedInSec += 0.1
+                currentRecord.timeConsumedInSec += 0.1
             })
         })
     }

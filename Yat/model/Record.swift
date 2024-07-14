@@ -7,9 +7,16 @@
 
 import Foundation
 import SwiftData
+import SwiftUI
 
 @Model
 class Record {
+    
+    // the unique identifier
+    var id: UUID
+    
+    var finished: Bool
+    
     // when the record was created
     var timestamp: Date
     
@@ -17,7 +24,7 @@ class Record {
     var timeConsumedInSec: Double
     
     // the article that was typed
-    @Relationship() var article: Article
+    var articleId: UUID
     
     // the input code from user in raw, _ for space, ⌫ for backspace
     var inputCode: String
@@ -28,7 +35,6 @@ class Record {
     
     // AKA 回改
     var revision: Int = 0
-    
 
     
     // AKA 速度
@@ -56,7 +62,7 @@ class Record {
     
     // AKA 字数
     var contentLength: Int{
-        article.content.count
+        realInput.count
     }
     
     // AKA 总键数
@@ -79,7 +85,11 @@ class Record {
         inputCode: String = "",
         realInput: String = ""
     ) {
-        self.article = article
+        let id = UUID()
+        self.id = id
+        self.articleId = article.id
+        print("我是\(id)，我正在使用的文章是\(article.title)")
+        self.finished = false
         self.timeConsumedInSec = timeConsumedInSec
         self.timestamp = timestamp
         self.inputCode = inputCode
@@ -89,13 +99,7 @@ class Record {
     public func addKeystroke(key: String) {
         inputCode.append(key)
     }
-    
-    
-    public func stringify() -> String {
-        // (mm:ss)
-        let timeFormatted = String(format: "%02d:%02d", Int(timeConsumedInSec) / 60, Int(timeConsumedInSec) % 60)
-         return "第\(article.paraNum)段 速度\(String(format: "%.2f", characterPerMin)) 击键\(String(format: "%.2f", keystrokePerSec)) 码长\(String(format: "%.2f", averageCodeLength)) 字数\(contentLength) 时间\(timeFormatted) 回改\(revision) 退格\(backspace) 打词\(String(format: "%.2f", wordRate))% yat v0.1a"
-    }
+
     
     public var isActive: Bool = false
     public var isInactive: Bool {

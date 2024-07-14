@@ -13,31 +13,31 @@ struct ArticleView: View {
     
     public var currentArticle: Article
     
-    public var currentRecord: Record
+    public var currentRecord: Record?
     
     var formattedText: AttributedString {
         let articleText = currentArticle.content
-        let userInputText = currentRecord.realInput
         var result = AttributedString(articleText)
-        
-        for (articleIndex, articleChar) in articleText.enumerated() {
-            if let range = result.range(of: String(articleChar)) {
-                if articleIndex < userInputText.count {
-                    let userInputChar = userInputText[userInputText.index(userInputText.startIndex, offsetBy: articleIndex)]
-                    if articleChar == userInputChar {
-                        // 正确的输入
-                        result[range].backgroundColor = .gray
+        if let currentRecord = currentRecord {
+            let userInputText = currentRecord.realInput
+            for (articleIndex, articleChar) in articleText.enumerated() {
+                if let range = result.range(of: String(articleChar)) {
+                    if articleIndex < userInputText.count {
+                        let userInputChar = userInputText[userInputText.index(userInputText.startIndex, offsetBy: articleIndex)]
+                        if articleChar == userInputChar {
+                            // 正确的输入
+                            result[range].backgroundColor = .gray
+                        } else {
+                            // 错误的输入
+                            result[range].backgroundColor = .red
+                        }
                     } else {
-                        // 错误的输入
-                        result[range].backgroundColor = .red
+                        // 用户输入比文章短,剩余部分显示为未输入
+                        result[range].backgroundColor = .clear
                     }
-                } else {
-                    // 用户输入比文章短,剩余部分显示为未输入
-                    result[range].backgroundColor = .clear
                 }
             }
         }
-        
         return result
     }
     var body: some View{

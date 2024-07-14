@@ -13,23 +13,30 @@ struct TypingView: NSViewRepresentable {
     
     public var currentArticle: Article
     
-    public var currentRecord: Record
+    @Environment(Record.self) private var currentRecord: Record
+    
+    public var nsView = YatNSTextView()
     
     
     @Environment(\.modelContext) private var modelContext
     
     func makeNSView(context: Context) -> NSTextView {
-        let textView = YatNSTextView()
-        textView.delegate = context.coordinator
-        textView.font = NSFont(name: "LXGW Wenkai", size: 30)
-        return textView
+        nsView.delegate = context.coordinator
+        nsView.font = NSFont(name: "LXGW Wenkai", size: 30)
+        return nsView
     }
     func updateNSView(_ nsView: NSTextView, context: Context) {
+        
+    }
+    
+    func textDidChange(){
+        print("typing正在使用的文章是\(currentArticle.id), 记录是\(currentRecord.id)")
         // update the input content with the new textview string
         currentRecord.realInput = getConfirmedText(from: nsView)
         print("realInput: \(currentRecord.realInput)")
-        print(currentRecord.stringify())
+        print(RecordUtil.genRecordStr(record: currentRecord, article: currentArticle))
     }
+    
     
     func getConfirmedText(from textView: NSTextView) -> String {
         let imeMarkedRange = textView.markedRange()
@@ -64,6 +71,7 @@ struct TypingView: NSViewRepresentable {
             }
             currentRecord.addKeystroke(key: convertedCode)
             print("convertedCode：\(convertedCode), keystrokes: \(currentRecord.inputCode)")
+            
         }
     }
     public func paste(_ sender: Any?){
@@ -77,13 +85,10 @@ struct TypingView: NSViewRepresentable {
             let newArticle = ArticleUtil.articleFromRaw(raw: pasteboardText)
             newArticle.activate()
             currentArticle.deactivate()
-            let newRecord = Record(article: newArticle)
-            newRecord.activate()
-            currentRecord.deactivate()
+            //            let newRecord = Record(article: newArticle)
             // crashed because of relationship, need to delve deeper
-          //  newArticle.records.append(newRecord)
+            //  newArticle.records.append(newRecord)
             modelContext.insert(newArticle)
-            modelContext.insert(newRecord)
         }
     }
     
@@ -102,24 +107,30 @@ struct TypingView: NSViewRepresentable {
             parent.paste(sender)
         }
         
+        func textDidChange(_ notification: Notification) {
+            parent.textDidChange()
+        }
+        
         func textView(_ textView: NSTextView, shouldChangeTextIn affectedCharRange: NSRange, replacementString: String?) -> Bool {
             print("affectedCharRange.locatiom: \(affectedCharRange.location), affectedCharRange.length: \(affectedCharRange.length), replacementString: \(replacementString ?? "nil")")
+            let currentRecord = parent.currentRecord
             if let replacementString = replacementString {
                 if replacementString.isEmpty {
                     if affectedCharRange.length == 1 {
                         //if the last char replaced by empty string, then it is a revision, notice that ime conversion acts like the last one or several chars are replaced by the new char(s)
-                        parent.currentRecord.revision += 1
+                        currentRecord.revision += 1
                     }
                 }else if replacementString.count > 1 && containsNonASCIICharacters(replacementString){
                     // if replacementString is not empty and has more than one char, then it is a word input
                     print("word input: \(replacementString)")
-                    parent.currentRecord.wordCount += replacementString.count
+                    currentRecord.wordCount += replacementString.count
                 }
             }
+            
             return true
         }
         
-    
+        
         
         func containsNonASCIICharacters(_ string: String) -> Bool {
             return string.unicodeScalars.contains { $0.value > 127 }

@@ -11,6 +11,9 @@ import SwiftData
 @Model
 class Article {
     
+    // the unique identifier of the article
+    var id: UUID
+    
     // when the article was recognized
     var timestamp: Date
 
@@ -23,9 +26,6 @@ class Article {
     // the paragraph number of the article
     var paraNum: Int
     
-    // the typing records of this article
-    @Relationship(deleteRule: .cascade, inverse: \Record.article) var records: [Record] = []
-    
     // hash of the content
     var contentHash: Int {
         return content.hashValue
@@ -37,6 +37,7 @@ class Article {
          title:String="暂无赛文",
          paraNum:Int=1
     ) {
+        self.id = UUID()
         self.timestamp = timestamp
         self.content = content
         self.title=title

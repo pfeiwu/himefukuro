@@ -26,6 +26,17 @@
          contextName = "TypingView.Coordinator.textDidChange(_:):TypingView.swift">
       </ContextState>
       <ContextState
+         contextName = "TypingView.textDidChange():TypingView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Record.article.getter:@__swiftmacro_3Yat6RecordC7article18_PersistedPropertyfMa_.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.article">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #2 in SpeedometerleView.body.getter:SpeedometerView.swift">
          <PersistentStrings>
             <PersistentString
@@ -49,6 +60,9 @@
                value = "article.title">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TypingView.Coordinator.getConfirmedText(from:):TypingView.swift">
       </ContextState>
       <ContextState
          contextName = "TypingData.article.getter:@__swiftmacro_3Yat10TypingDataC7article18_PersistedPropertyfMa_.swift">
@@ -79,13 +93,19 @@
          contextName = "Record.stringify():Record.swift">
          <PersistentStrings>
             <PersistentString
-               value = "article.paraNum">
-            </PersistentString>
-            <PersistentString
                value = "article">
             </PersistentString>
             <PersistentString
+               value = "article.paraNum">
+            </PersistentString>
+            <PersistentString
                value = "timeConsumedInSec">
+            </PersistentString>
+            <PersistentString
+               value = "self.article">
+            </PersistentString>
+            <PersistentString
+               value = "self.id">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

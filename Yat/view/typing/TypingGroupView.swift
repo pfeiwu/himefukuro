@@ -20,46 +20,27 @@ struct TypingGroupView: View {
         order: .reverse
     ) private var activeArticles: [Article]
     
-    @Query(
-        filter: #Predicate<Record> { $0.isActive == true },
-        sort: \Record.timestamp,
-        order: .reverse
-    ) private var activeRecords: [Record]
-    
     private var currentArticle: Article {
         activeArticles.last ?? Article()
     }
     
-    private var currentRecord: Record {
-        if let record = activeRecords.last {
-            return record
-        }
-        return newReocrd()
-    }
-    
-    @discardableResult
-    private func newReocrd()->Record{
-        let newRecord = Record(article: currentArticle)
-        newRecord.activate()
-//        currentArticle.records.append(newRecord)
-        modelContext.insert(newRecord)
-        return newRecord
-    }
-    
+    @State private var currentRecord: Record = Record(article : Article())
     
     @State private var typingState: TypingState = .ready
     
-    var body: some View{
-        VStack(spacing: 0){
+    var body: some View {
+        VStack(spacing: 0) {
             ArticleView(currentArticle: currentArticle, currentRecord: currentRecord)
                 .padding()
-            SpeedometerleView(currentRecord: currentRecord)
-            TypingView(currentArticle: currentArticle, currentRecord: currentRecord)
+                          SpeedometerleView(currentRecord: currentRecord)
+            TypingView(currentArticle: currentArticle)
+                .environment(currentRecord)
                 .padding()
-                .onAppear(){
-                    newReocrd()
-                }
-            
+        }
+        .onChange(of: activeArticles){
+            currentRecord.articleId = currentArticle.id
+        }.onAppear(){
+            currentRecord.articleId = currentArticle.id
         }
     }
 }

@@ -24,6 +24,7 @@
 		A01D5E7D2C414015007E9836 /* YatNSTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D5E7C2C414015007E9836 /* YatNSTextView.swift */; };
 		A01D5E852C417B4D007E9836 /* Activable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D5E842C417B4D007E9836 /* Activable.swift */; };
 		A01D5E872C4187A8007E9836 /* ArticleUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D5E862C4187A8007E9836 /* ArticleUtil.swift */; };
+		A0C54E502C43BD8700BB5F9F /* RecordUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C54E4F2C43BD8700BB5F9F /* RecordUtil.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		A01D5E7C2C414015007E9836 /* YatNSTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YatNSTextView.swift; sourceTree = "<group>"; };
 		A01D5E842C417B4D007E9836 /* Activable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activable.swift; sourceTree = "<group>"; };
 		A01D5E862C4187A8007E9836 /* ArticleUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleUtil.swift; sourceTree = "<group>"; };
+		A0C54E4F2C43BD8700BB5F9F /* RecordUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordUtil.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				A01D5E862C4187A8007E9836 /* ArticleUtil.swift */,
+				A0C54E4F2C43BD8700BB5F9F /* RecordUtil.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0C54E502C43BD8700BB5F9F /* RecordUtil.swift in Sources */,
 				A01D5E6A2C4124A5007E9836 /* SettingView.swift in Sources */,
 				A01D5E852C417B4D007E9836 /* Activable.swift in Sources */,
 				A01D5E3C2C41221A007E9836 /* MainView.swift in Sources */,

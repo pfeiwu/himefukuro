@@ -100,7 +100,7 @@ class Record {
         timestamp = Date()
         timeConsumedInSec = 0.0
         inputCode = ""
-        inputCode = ""
+        realInput = ""
     }
     
     public func addKeystroke(key: String) {

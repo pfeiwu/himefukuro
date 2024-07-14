@@ -36,5 +36,51 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "583835AD-1A4E-4F76-9262-84AD32F2E842"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Yat/view/typing/ArticleView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "formattedText"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "583835AD-1A4E-4F76-9262-84AD32F2E842 - 354ef904c28f07db"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Yat.ArticleView.formattedText.getter : Foundation.AttributedString"
+                  moduleName = "Yat"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hiiragi/newYat/Yat/Yat/view/typing/ArticleView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26">
+               </Location>
+               <Location
+                  uuid = "583835AD-1A4E-4F76-9262-84AD32F2E842 - 354ef904c28f07db"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Yat.ArticleView.formattedText.getter : Foundation.AttributedString"
+                  moduleName = "Yat"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hiiragi/newYat/Yat/Yat/view/typing/ArticleView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

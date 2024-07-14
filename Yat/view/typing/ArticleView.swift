@@ -16,25 +16,29 @@ struct ArticleView: View {
     @Environment(Record.self) private var currentRecord: Record
     
     var formattedText: AttributedString {
+//        let correctAttributeCon = AttributeContainer(
+//            foregroundColor: .black,
+//            backgroundColor: .clear
+//        )
         let articleText = currentArticle.content
-        var result = AttributedString(articleText)
+        var result = AttributedString("")
         let userInputText = currentRecord.realInput
         for (articleIndex, articleChar) in articleText.enumerated() {
-            if let range = result.range(of: String(articleChar)) {
-                if articleIndex < userInputText.count {
-                    let userInputChar = userInputText[userInputText.index(userInputText.startIndex, offsetBy: articleIndex)]
-                    if articleChar == userInputChar {
-                        // 正确的输入
-                        result[range].backgroundColor = .gray
-                    } else {
-                        // 错误的输入
-                        result[range].backgroundColor = .red
-                    }
+            var newChar = AttributedString(String(articleChar))
+            if articleIndex < userInputText.count {
+                let userInputChar = userInputText[userInputText.index(userInputText.startIndex, offsetBy: articleIndex)]
+                if articleChar == userInputChar {
+                    // 正确的输入
+                    newChar.backgroundColor = .lightGray
                 } else {
-                    // 用户输入比文章短,剩余部分显示为未输入
-                    result[range].backgroundColor = .clear
+                    // 错误的输入
+                    newChar.backgroundColor = .red
                 }
+            } else {
+                // 用户输入比文章短,剩余部分显示为未输入
+                newChar.backgroundColor = .clear
             }
+            result.append(newChar)
         }
         return result
     }

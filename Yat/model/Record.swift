@@ -31,16 +31,27 @@ class Record {
     
     var realInput: String
     
+    
+    // AKA 打词
     var wordCount: Int = 0
     
     // AKA 回改
     var revision: Int = 0
+    
+    // AKA 错字
+    var typo: Int = 0
     
     
     // AKA 速度
     var characterPerMin: Double {
         guard timeConsumedInSec > 0 else { return 0 }
         return Double(realInput.count) / Double(timeConsumedInSec) * 60
+    }
+    
+    // AKA 键准
+    var accuracy: Double {
+        guard keystrokeTotal > 0 else { return 0 }
+        return (Double(keystrokeTotal - backspace) - Double(revision) * averageCodeLength)/Double(keystrokeTotal)
     }
     
     // AKA 码长
@@ -78,6 +89,7 @@ class Record {
     
     
     
+    
     init(
         timestamp: Date = Date(),
         timeConsumedInSec: Double = 0.0,
@@ -101,6 +113,8 @@ class Record {
         timeConsumedInSec = 0.0
         inputCode = ""
         realInput = ""
+        wordCount = 0
+        revision = 0
     }
     
     public func addKeystroke(key: String) {

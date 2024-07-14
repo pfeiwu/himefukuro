@@ -32,15 +32,10 @@ struct TypingView: NSViewRepresentable {
         return nsView
     }
     func updateNSView(_ nsView: NSTextView, context: Context) {
-//        switch attributeCon.state {
-//            case .finished:
-//                nsView.isEditable=false
-//            case .pause, .ready:
-//                nsView.isEditable=true
-//            case .typing:
-//            break
-//        }
+
     }
+    
+    @State public var lastConfirmedText:String = ""
     
     func textDidChange(){
         if attributeCon.state == .finished {
@@ -50,7 +45,24 @@ struct TypingView: NSViewRepresentable {
         }
         print("typing正在使用的文章是\(currentArticle.id), 记录是\(currentRecord.id)")
         // update the input content with the new textview string
-        currentRecord.realInput = getConfirmedText(from: nsView)
+        let currentConfirmedText = getConfirmedText(from: nsView)
+        let countDiff = currentConfirmedText.count - lastConfirmedText.count
+        if countDiff < 0 {
+            print("currentConfirmedText: \(currentConfirmedText), lastConfirmedText: \(lastConfirmedText),countDiff: \(countDiff)")
+            currentRecord.revision -= countDiff
+        }else {
+            let newInput = currentConfirmedText.suffix(countDiff)
+            print("newInput: \(newInput)")
+            let trimmedString = newInput.trimmingCharacters(in: .punctuationCharacters)
+            if trimmedString.count > 1 {
+                print("word input: \(trimmedString)")
+                currentRecord.wordCount += trimmedString.count
+            }
+        }
+        
+        currentRecord.realInput = currentConfirmedText
+        lastConfirmedText = currentConfirmedText
+        
         print("realInput: \(currentRecord.realInput)")
         print(RecordUtil.genRecordStr(record: currentRecord, article: currentArticle))
         
@@ -64,7 +76,6 @@ struct TypingView: NSViewRepresentable {
                 NSPasteboard.general.setString(recordStr, forType: .string)
             }
         }
-      
     }
     
     
@@ -90,12 +101,12 @@ struct TypingView: NSViewRepresentable {
     
     public func keyDown(with event: NSEvent){
         switch attributeCon.state {
-            case .finished:
+        case .finished:
             return
-            case .pause, .ready:
+        case .pause, .ready:
             attributeCon.state = .typing
             break
-            case .typing:
+        case .typing:
             break
         }
         print("keyDown: \(event.keyCode)")
@@ -112,6 +123,12 @@ struct TypingView: NSViewRepresentable {
             print("convertedCode：\(convertedCode), keystrokes: \(currentRecord.inputCode)")
         }
     }
+    public func reset(){
+        nsView.string=""
+        lastConfirmedText = ""
+        attributeCon.state = .ready
+    }
+    
     public func paste(_ sender: Any?){
         if let pasteboard = NSPasteboard.general.string(forType: .string) {
             let pasteboardText = pasteboard
@@ -123,12 +140,8 @@ struct TypingView: NSViewRepresentable {
             let newArticle = ArticleUtil.articleFromRaw(raw: pasteboardText)
             newArticle.activate()
             currentArticle.deactivate()
-            //            let newRecord = Record(article: newArticle)
-            // crashed because of relationship, need to delve deeper
-            //  newArticle.records.append(newRecord)
             modelContext.insert(newArticle)
-            nsView.string=""
-            attributeCon.state = .ready
+            reset()
         }
     }
     
@@ -150,32 +163,6 @@ struct TypingView: NSViewRepresentable {
         func textDidChange(_ notification: Notification) {
             parent.textDidChange()
         }
-        
-        func textView(_ textView: NSTextView, shouldChangeTextIn affectedCharRange: NSRange, replacementString: String?) -> Bool {
-            print("affectedCharRange.locatiom: \(affectedCharRange.location), affectedCharRange.length: \(affectedCharRange.length), replacementString: \(replacementString ?? "nil")")
-            let currentRecord = parent.currentRecord
-            if let replacementString = replacementString {
-                if replacementString.isEmpty {
-                    if affectedCharRange.length == 1 {
-                        //if the last char replaced by empty string, then it is a revision, notice that ime conversion acts like the last one or several chars are replaced by the new char(s)
-                        currentRecord.revision += 1
-                    }
-                }else if replacementString.count > 1 && containsNonASCIICharacters(replacementString){
-                    // if replacementString is not empty and has more than one char, then it is a word input
-                    
-                    // 如果replacementString以标点符号结尾，去掉标点符号后，字符数仍大于1的，才记打词
-                    let trimmedString = replacementString.trimmingCharacters(in: .punctuationCharacters)
-                    if trimmedString.count > 1 {
-                        print("word input: \(trimmedString)")
-                        currentRecord.wordCount += trimmedString.count
-                    }
-                }
-            }
-            
-            return true
-        }
-        
-        
         
         func containsNonASCIICharacters(_ string: String) -> Bool {
             return string.unicodeScalars.contains { $0.value > 127 }

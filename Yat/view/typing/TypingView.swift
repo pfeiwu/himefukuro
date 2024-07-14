@@ -21,10 +21,30 @@ struct TypingView: NSViewRepresentable {
     func makeNSView(context: Context) -> NSTextView {
         let textView = YatNSTextView()
         textView.delegate = context.coordinator
+        textView.font = NSFont(name: "LXGW Wenkai", size: 30)
         return textView
     }
     func updateNSView(_ nsView: NSTextView, context: Context) {
+        // update the input content with the new textview string
+        currentRecord.realInput = getConfirmedText(from: nsView)
+        print("realInput: \(currentRecord.realInput)")
+        print(currentRecord.stringify())
+    }
+    
+    func getConfirmedText(from textView: NSTextView) -> String {
+        let imeMarkedRange = textView.markedRange()
+        let string = textView.string
+        print("imeMarkedRange: \(imeMarkedRange), string: \(string)")
         
+        if imeMarkedRange.length > 0 {
+            // 存在输入法未确定的编码部分
+            let confirmedRange = NSRange(location: 0, length: imeMarkedRange.location)
+            let confirmedText = string.substring(with: Range(confirmedRange, in: string)!)
+            return confirmedText
+        } else {
+            // 没有输入法未确定的编码部分，返回完整的文本内容
+            return string
+        }
     }
     
     func makeCoordinator() -> Coordinator {
@@ -32,6 +52,7 @@ struct TypingView: NSViewRepresentable {
     }
     
     public func keyDown(with event: NSEvent){
+        print("keyDown: \(event.keyCode)")
         if let characters = event.characters {
             var convertedCode = "☒"
             if characters == " " {
@@ -59,11 +80,10 @@ struct TypingView: NSViewRepresentable {
             let newRecord = Record(article: newArticle)
             newRecord.activate()
             currentRecord.deactivate()
-            // crashed because of relationship need to delve deeper
+            // crashed because of relationship, need to delve deeper
           //  newArticle.records.append(newRecord)
             modelContext.insert(newArticle)
             modelContext.insert(newRecord)
-            
         }
     }
     
@@ -96,11 +116,10 @@ struct TypingView: NSViewRepresentable {
                     parent.currentRecord.wordCount += replacementString.count
                 }
             }
-            // update the input content with the new textview string
-            parent.currentRecord.realInput = textView.string
-            print(parent.currentRecord.stringify())
             return true
         }
+        
+    
         
         func containsNonASCIICharacters(_ string: String) -> Bool {
             return string.unicodeScalars.contains { $0.value > 127 }

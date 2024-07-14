@@ -30,4 +30,8 @@ struct YatApp: App {
         }
         .modelContainer(sharedModelContainer)
     }
+    
+    init(){
+        print(URL.applicationSupportDirectory.path(percentEncoded: false))
+    }
 }

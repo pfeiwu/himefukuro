@@ -43,6 +43,8 @@ struct ArticleView: View {
     var body: some View{
         VStack(spacing: 0){
             Text(formattedText)
+                .font(.custom("LXGW Wenkai", size: 30))
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
     

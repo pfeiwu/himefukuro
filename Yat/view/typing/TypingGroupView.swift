@@ -34,6 +34,11 @@ struct TypingGroupView: View {
         if let record = activeRecords.last {
             return record
         }
+        return newReocrd()
+    }
+    
+    @discardableResult
+    private func newReocrd()->Record{
         let newRecord = Record(article: currentArticle)
         newRecord.activate()
 //        currentArticle.records.append(newRecord)
@@ -51,7 +56,9 @@ struct TypingGroupView: View {
             SpeedometerleView(currentRecord: currentRecord)
             TypingView(currentArticle: currentArticle, currentRecord: currentRecord)
                 .padding()
-            
+                .onAppear(){
+                    newReocrd()
+                }
             
         }
     }

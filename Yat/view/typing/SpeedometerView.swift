@@ -9,7 +9,9 @@ import Foundation
 import SwiftUI
 
 struct SpeedometerleView: View {
-    public var currentRecord: Record
+    @Environment(Article.self) private var currentArticle: Article
+    
+    @Environment(Record.self) private var currentRecord: Record
     
     // timer by 100ms
     @State private var timer: Timer?

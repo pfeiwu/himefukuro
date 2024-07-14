@@ -11,7 +11,7 @@ import UniformTypeIdentifiers
 import AppKit
 struct TypingView: NSViewRepresentable {
     
-    public var currentArticle: Article
+    @Environment(Article.self) private var currentArticle: Article
     
     @Environment(Record.self) private var currentRecord: Record
     
@@ -89,6 +89,7 @@ struct TypingView: NSViewRepresentable {
             // crashed because of relationship, need to delve deeper
             //  newArticle.records.append(newRecord)
             modelContext.insert(newArticle)
+            nsView.string=""
         }
     }
     

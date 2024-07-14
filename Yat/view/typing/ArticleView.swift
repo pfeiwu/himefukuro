@@ -11,35 +11,34 @@ import SwiftData
 
 struct ArticleView: View {
     
-    public var currentArticle: Article
+    @Environment(Article.self) private var currentArticle: Article
     
-    public var currentRecord: Record?
+    @Environment(Record.self) private var currentRecord: Record
     
     var formattedText: AttributedString {
         let articleText = currentArticle.content
         var result = AttributedString(articleText)
-        if let currentRecord = currentRecord {
-            let userInputText = currentRecord.realInput
-            for (articleIndex, articleChar) in articleText.enumerated() {
-                if let range = result.range(of: String(articleChar)) {
-                    if articleIndex < userInputText.count {
-                        let userInputChar = userInputText[userInputText.index(userInputText.startIndex, offsetBy: articleIndex)]
-                        if articleChar == userInputChar {
-                            // 正确的输入
-                            result[range].backgroundColor = .gray
-                        } else {
-                            // 错误的输入
-                            result[range].backgroundColor = .red
-                        }
+        let userInputText = currentRecord.realInput
+        for (articleIndex, articleChar) in articleText.enumerated() {
+            if let range = result.range(of: String(articleChar)) {
+                if articleIndex < userInputText.count {
+                    let userInputChar = userInputText[userInputText.index(userInputText.startIndex, offsetBy: articleIndex)]
+                    if articleChar == userInputChar {
+                        // 正确的输入
+                        result[range].backgroundColor = .gray
                     } else {
-                        // 用户输入比文章短,剩余部分显示为未输入
-                        result[range].backgroundColor = .clear
+                        // 错误的输入
+                        result[range].backgroundColor = .red
                     }
+                } else {
+                    // 用户输入比文章短,剩余部分显示为未输入
+                    result[range].backgroundColor = .clear
                 }
             }
         }
         return result
     }
+    
     var body: some View{
         VStack(spacing: 0){
             Text(formattedText)

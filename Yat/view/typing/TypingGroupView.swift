@@ -20,27 +20,39 @@ struct TypingGroupView: View {
         order: .reverse
     ) private var activeArticles: [Article]
     
-    private var currentArticle: Article {
-        activeArticles.last ?? Article()
-    }
-    
     @State private var currentRecord: Record = Record(article : Article())
+    
+    @State private var currentArticle: Article = Article()
     
     @State private var typingState: TypingState = .ready
     
     var body: some View {
         VStack(spacing: 0) {
-            ArticleView(currentArticle: currentArticle, currentRecord: currentRecord)
-                .padding()
-                          SpeedometerleView(currentRecord: currentRecord)
-            TypingView(currentArticle: currentArticle)
+            ArticleView()
                 .environment(currentRecord)
+                .environment(currentArticle)
+                .padding()
+            SpeedometerleView()
+                .environment(currentRecord)
+                .environment(currentArticle)
+            TypingView()
+                .environment(currentRecord)
+                .environment(currentArticle)
                 .padding()
         }
         .onChange(of: activeArticles){
-            currentRecord.articleId = currentArticle.id
+            if let lastArticle = activeArticles.first {
+                currentArticle = lastArticle
+                currentRecord.articleId = currentArticle.id
+                currentRecord.reset()
+                print("发现载文，载文title是\(currentArticle.title)")
+            }
         }.onAppear(){
-            currentRecord.articleId = currentArticle.id
+            if let lastArticle = activeArticles.first {
+                currentArticle = lastArticle
+                currentRecord.articleId = currentArticle.id
+                currentRecord.reset()
+            }
         }
     }
 }
@@ -50,7 +62,7 @@ struct TypingGroupView: View {
 enum TypingState {
     case ready
     case typing
+    case pause
     case finished
-    case dropped
 }
 

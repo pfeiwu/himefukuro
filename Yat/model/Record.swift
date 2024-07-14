@@ -35,7 +35,7 @@ class Record {
     
     // AKA 回改
     var revision: Int = 0
-
+    
     
     // AKA 速度
     var characterPerMin: Double {
@@ -75,7 +75,7 @@ class Record {
         return inputCode.filter { $0 == "⌫" }.count
     }
     
-  
+    
     
     
     init(
@@ -96,10 +96,17 @@ class Record {
         self.realInput = realInput
     }
     
+    public func reset(){
+        timestamp = Date()
+        timeConsumedInSec = 0.0
+        inputCode = ""
+        inputCode = ""
+    }
+    
     public func addKeystroke(key: String) {
         inputCode.append(key)
     }
-
+    
     
     public var isActive: Bool = false
     public var isInactive: Bool {

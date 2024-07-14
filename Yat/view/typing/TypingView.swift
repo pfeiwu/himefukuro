@@ -56,7 +56,14 @@ struct TypingView: NSViewRepresentable {
             let newArticle = ArticleUtil.articleFromRaw(raw: pasteboardText)
             newArticle.activate()
             currentArticle.deactivate()
+            let newRecord = Record(article: newArticle)
+            newRecord.activate()
+            currentRecord.deactivate()
+            // crashed because of relationship need to delve deeper
+          //  newArticle.records.append(newRecord)
             modelContext.insert(newArticle)
+            modelContext.insert(newRecord)
+            
         }
     }
     
@@ -76,14 +83,16 @@ struct TypingView: NSViewRepresentable {
         }
         
         func textView(_ textView: NSTextView, shouldChangeTextIn affectedCharRange: NSRange, replacementString: String?) -> Bool {
+            print("affectedCharRange.locatiom: \(affectedCharRange.location), affectedCharRange.length: \(affectedCharRange.length), replacementString: \(replacementString ?? "nil")")
             if let replacementString = replacementString {
                 if replacementString.isEmpty {
                     if affectedCharRange.length == 1 {
                         //if the last char replaced by empty string, then it is a revision, notice that ime conversion acts like the last one or several chars are replaced by the new char(s)
                         parent.currentRecord.revision += 1
                     }
-                }else if replacementString.count > 1{
+                }else if replacementString.count > 1 && containsNonASCIICharacters(replacementString){
                     // if replacementString is not empty and has more than one char, then it is a word input
+                    print("word input: \(replacementString)")
                     parent.currentRecord.wordCount += replacementString.count
                 }
             }
@@ -91,6 +100,10 @@ struct TypingView: NSViewRepresentable {
             parent.currentRecord.realInput = textView.string
             print(parent.currentRecord.stringify())
             return true
+        }
+        
+        func containsNonASCIICharacters(_ string: String) -> Bool {
+            return string.unicodeScalars.contains { $0.value > 127 }
         }
     }
 }

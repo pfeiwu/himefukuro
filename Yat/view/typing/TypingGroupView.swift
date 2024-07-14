@@ -16,12 +16,14 @@ struct TypingGroupView: View {
     
     @Query(
         filter: #Predicate<Article> { $0.isActive == true },
-        sort: \Article.timestamp
+        sort: \Article.timestamp,
+        order: .reverse
     ) private var activeArticles: [Article]
     
     @Query(
         filter: #Predicate<Record> { $0.isActive == true },
-        sort: \Record.timestamp
+        sort: \Record.timestamp,
+        order: .reverse
     ) private var activeRecords: [Record]
     
     private var currentArticle: Article {

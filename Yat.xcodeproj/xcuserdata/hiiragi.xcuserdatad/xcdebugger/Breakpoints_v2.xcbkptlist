@@ -46,38 +46,144 @@
             filePath = "Yat/view/typing/ArticleView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
             landmarkName = "formattedText"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1A459627-2921-4E0B-BF76-245498AA8B99"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Yat/util/RecordUtil.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "genRecordStr(record:article:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "827B5734-5A75-4621-B47E-FE8B3D31B709"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Yat/view/typing/TypingView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "paste(_:)"
+            landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "583835AD-1A4E-4F76-9262-84AD32F2E842 - 354ef904c28f07db"
+                  uuid = "827B5734-5A75-4621-B47E-FE8B3D31B709 - a40d1fee9b2fe7a5"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Yat.ArticleView.formattedText.getter : Foundation.AttributedString"
+                  symbolName = "Yat.TypingView.Coordinator.__allocating_init() -&gt; Yat.TypingView.Coordinator"
                   moduleName = "Yat"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hiiragi/newYat/Yat/Yat/view/typing/ArticleView.swift"
+                  urlString = "file:///Users/hiiragi/newYat/Yat/Yat/view/typing/TypingView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26">
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
                </Location>
                <Location
-                  uuid = "583835AD-1A4E-4F76-9262-84AD32F2E842 - 354ef904c28f07db"
+                  uuid = "827B5734-5A75-4621-B47E-FE8B3D31B709 - 67efe1189bfa35cd"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Yat.ArticleView.formattedText.getter : Foundation.AttributedString"
+                  symbolName = "Yat.TypingView.Coordinator.init() -&gt; Yat.TypingView.Coordinator"
                   moduleName = "Yat"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hiiragi/newYat/Yat/Yat/view/typing/ArticleView.swift"
+                  urlString = "file:///Users/hiiragi/newYat/Yat/Yat/view/typing/TypingView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26">
+                  startingLineNumber = "96"
+                  endingLineNumber = "96">
+               </Location>
+               <Location
+                  uuid = "827B5734-5A75-4621-B47E-FE8B3D31B709 - ad893071d0ef870b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Yat.TypingView.Coordinator.__deallocating_deinit"
+                  moduleName = "Yat"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hiiragi/newYat/Yat/Yat/view/typing/TypingView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
+               </Location>
+               <Location
+                  uuid = "827B5734-5A75-4621-B47E-FE8B3D31B709 - 94dc1c526b7dcdf4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Yat.TypingView.paste(Swift.Optional&lt;Any&gt;) -&gt; ()"
+                  moduleName = "Yat"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hiiragi/newYat/Yat/Yat/view/typing/TypingView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "96"
+                  endingLineNumber = "96">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "51E7FAA2-394F-452B-A5CE-553446D77A5A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Yat/view/typing/TypingView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "textDidChange()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "51E7FAA2-394F-452B-A5CE-553446D77A5A - 9294ac603d406870"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Yat.TypingView.textDidChange() -&gt; ()"
+                  moduleName = "Yat"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hiiragi/newYat/Yat/Yat/view/typing/TypingView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35">
+               </Location>
+               <Location
+                  uuid = "51E7FAA2-394F-452B-A5CE-553446D77A5A - 9294ac603d40175f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Yat.TypingView.textDidChange() -&gt; ()"
+                  moduleName = "Yat"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hiiragi/newYat/Yat/Yat/view/typing/TypingView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42">
                </Location>
             </Locations>
          </BreakpointContent>

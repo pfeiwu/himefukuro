@@ -11,9 +11,13 @@ import SwiftData
 
 struct ArticleView: View {
     
-    @Environment(Article.self) private var currentArticle: Article
+    @Environment(ArticleContainer.self) private var currentArticleCon: ArticleContainer
     
     @Environment(Record.self) private var currentRecord: Record
+    
+    private var currentArticle: Article {
+        currentArticleCon.article
+    }
     
     var formattedText: AttributedString {
 //        let correctAttributeCon = AttributeContainer(

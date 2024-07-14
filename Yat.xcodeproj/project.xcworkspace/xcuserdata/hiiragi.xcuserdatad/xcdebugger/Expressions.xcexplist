@@ -3,6 +3,25 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "static RecordUtil.genRecordStr(record:article:):RecordUtil.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "article.title">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TypingView.paste(_:):TypingView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "newArticle.title">
+            </PersistentString>
+            <PersistentString
+               value = "newArticle.paraNum">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "TypingGroupView.currentRecord.getter:TypingGroupView.swift">
          <PersistentStrings>
             <PersistentString

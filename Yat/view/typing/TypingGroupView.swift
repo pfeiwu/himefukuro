@@ -22,7 +22,7 @@ struct TypingGroupView: View {
     
     @State private var currentRecord: Record = Record(article : Article())
     
-    @State private var currentArticle: Article = Article()
+    @State private var currentArticleCon: ArticleContainer = ArticleContainer(article: Article())
     
     @State private var typingState: TypingState = .ready
     
@@ -30,27 +30,26 @@ struct TypingGroupView: View {
         VStack(spacing: 0) {
             ArticleView()
                 .environment(currentRecord)
-                .environment(currentArticle)
+                .environment(currentArticleCon)
                 .padding()
             SpeedometerleView()
                 .environment(currentRecord)
-                .environment(currentArticle)
+                .environment(currentArticleCon)
             TypingView()
                 .environment(currentRecord)
-                .environment(currentArticle)
+                .environment(currentArticleCon)
                 .padding()
         }
         .onChange(of: activeArticles){
             if let lastArticle = activeArticles.first {
-                currentArticle = lastArticle
-                currentRecord.articleId = currentArticle.id
+                currentArticleCon.article = lastArticle
                 currentRecord.reset()
-                print("发现载文，载文title是\(currentArticle.title)")
+                print("发现载文，载文title是\(lastArticle.title)")
             }
         }.onAppear(){
             if let lastArticle = activeArticles.first {
-                currentArticle = lastArticle
-                currentRecord.articleId = currentArticle.id
+                currentArticleCon.article = lastArticle
+                currentRecord.articleId = lastArticle.id
                 currentRecord.reset()
             }
         }

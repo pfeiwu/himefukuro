@@ -11,9 +11,13 @@ import UniformTypeIdentifiers
 import AppKit
 struct TypingView: NSViewRepresentable {
     
-    @Environment(Article.self) private var currentArticle: Article
+    @Environment(ArticleContainer.self) private var currentArticleCon: ArticleContainer
     
     @Environment(Record.self) private var currentRecord: Record
+    
+    private var currentArticle: Article {
+        currentArticleCon.article
+    }
     
     public var nsView = YatNSTextView()
     

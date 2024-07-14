@@ -32,10 +32,22 @@ struct TypingView: NSViewRepresentable {
         return nsView
     }
     func updateNSView(_ nsView: NSTextView, context: Context) {
-        
+//        switch attributeCon.state {
+//            case .finished:
+//                nsView.isEditable=false
+//            case .pause, .ready:
+//                nsView.isEditable=true
+//            case .typing:
+//            break
+//        }
     }
     
     func textDidChange(){
+        if attributeCon.state == .finished {
+            nsView.string = String(currentRecord.realInput.prefix(currentArticle.content.count))
+            print("已经结束辣！")
+            return
+        }
         print("typing正在使用的文章是\(currentArticle.id), 记录是\(currentRecord.id)")
         // update the input content with the new textview string
         currentRecord.realInput = getConfirmedText(from: nsView)
@@ -52,6 +64,7 @@ struct TypingView: NSViewRepresentable {
                 NSPasteboard.general.setString(recordStr, forType: .string)
             }
         }
+      
     }
     
     
@@ -81,6 +94,7 @@ struct TypingView: NSViewRepresentable {
             return
             case .pause, .ready:
             attributeCon.state = .typing
+            break
             case .typing:
             break
         }
@@ -148,8 +162,13 @@ struct TypingView: NSViewRepresentable {
                     }
                 }else if replacementString.count > 1 && containsNonASCIICharacters(replacementString){
                     // if replacementString is not empty and has more than one char, then it is a word input
-                    print("word input: \(replacementString)")
-                    currentRecord.wordCount += replacementString.count
+                    
+                    // 如果replacementString以标点符号结尾，去掉标点符号后，字符数仍大于1的，才记打词
+                    let trimmedString = replacementString.trimmingCharacters(in: .punctuationCharacters)
+                    if trimmedString.count > 1 {
+                        print("word input: \(trimmedString)")
+                        currentRecord.wordCount += trimmedString.count
+                    }
                 }
             }
             

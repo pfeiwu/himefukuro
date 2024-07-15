@@ -12,20 +12,20 @@ class RecordUtil {
     
     
     static public func genRecordStr(record: Record, article: Article) ->String{
-        return "第\(article.paraNum)段 \(genRecordStr(record: record))"
+        return "第\(article.paraNum)段 \(genRecordSegStr(record: record, article: article))"
     }
     
-    static public func genRecordStr(record: Record) ->String{
-        return "\(speedSegment(record: record)) \(keystrokePerSecSegment(record: record)) \(typoSegment(record: record)) \(averageCodeLengthSegment(record: record)) \(accuracySegment(record: record)) \(timeConsumedSegment(record: record)) \(revisionSegment(record: record)) \(backspaceSegment(record: record)) \(wordRateSegment(record: record)) \(verSegment())"
+    static public func genRecordSegStr(record: Record, article: Article) ->String {
+        return "\(speedSegment(record: record)) \(keystrokePerSecSegment(record: record)) \(typoSegment(record: record)) \(averageCodeLengthSegment(record: record)) \(accuracySegment(record: record)) \(contentLengthSegment(article: article)) \(timeConsumedSegment(record: record)) \(revisionSegment(record: record)) \(backspaceSegment(record: record)) \(wordRateSegment(record: record)) \(verSegment())"
     }
     
     static public func speedSegment(record: Record) -> String {
-        var cpm = record.characterPerMin
-        var cpmm5 = record.characterPerMinWithTypoTimes5
+        let cpm = record.characterPerMin
+        let cpmm5 = record.characterPerMinWithTypoTimes5
         if(cpmm5>0){
-            return "速度\(String(format: "%.2f", record.characterPerMinWithTypoTimes5))/\(String(format: "%.2f", record.characterPerMin))"
+            return "速度\(String(format: "%.2f", cpmm5))/\(String(format: "%.2f", cpm))"
         }else{
-            return "速度\(String(format: "%.2f", record.characterPerMin))"
+            return "速度\(String(format: "%.2f", cpm))"
         }
     }
     

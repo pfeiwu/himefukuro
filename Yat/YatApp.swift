@@ -10,6 +10,8 @@ import SwiftData
 
 @main
 struct YatApp: App {
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Article.self,

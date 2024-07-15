@@ -48,6 +48,12 @@ class Record {
         return Double(realInput.count) / Double(timeConsumedInSec) * 60
     }
     
+    // AKA 错一罚五
+    var characterPerMinWithTypoTimes5 :Double {
+        guard typo > 0 && timeConsumedInSec > 0 else { return 0 }
+        return Double(realInput.count - typo * 5) / Double(timeConsumedInSec) * 60
+    }
+    
     // AKA 键准
     var accuracy: Double {
         guard keystrokeTotal > 0 else { return 0 }

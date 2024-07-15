@@ -89,7 +89,15 @@ struct TypingView: NSViewRepresentable {
         // 当用户输入长度和文章长度相同且最后一个字符相同时，判断输入结束
         if currentRecord.realInput.count == currentArticle.content.count {
             if currentRecord.realInput.last == currentArticle.content.last {
+                
+                var typo = 0
+                for (inputChar, contentChar) in zip(currentRecord.realInput, currentArticle.content) {
+                    if inputChar != contentChar {
+                        typo += 1
+                    }
+                }
                 attributeCon.state = .finished
+                currentRecord.typo = typo
                 // 将成绩放到剪贴板
                 let recordStr = RecordUtil.genRecordStr(record: currentRecord, article: currentArticle)
                 NSPasteboard.general.clearContents()

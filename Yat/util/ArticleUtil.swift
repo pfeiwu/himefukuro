@@ -53,6 +53,9 @@ class ArticleUtil {
             } else if let range = firstLine.range(of: " ") {
                 return String(firstLine[..<range.lowerBound])
             }
+            if(lines.count>2){
+                return lines[0]
+            }
         }
         return "自由发文"
     }

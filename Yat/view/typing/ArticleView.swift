@@ -17,34 +17,31 @@ struct ArticleView: View {
         currentArticleCon.article
     }
     
-    var formattedTextLines: [AttributedString] {
+    var formattedTextLines: [(text: AttributedString, isTypingLine: Bool)] {
         let articleText = currentArticle.content
-        var result :[AttributedString] = []
+        var result :[(text: AttributedString, isTypingLine: Bool)] = []
         var strResult :[String] = []
         let userInputText = currentRecord.realInput
         
         var currentLine = AttributedString("")
         var currentLineStr = ""
         var approximateSize = 0
-        var measureCount = 0
-        var unmeasureCount = 0
+        var hasInput = false
+        var hasUninput = false
         for (articleIndex, articleChar) in articleText.enumerated() {
             if currentLineStr.count >= approximateSize {
                 let currentLineWith = measureTextWidth(text: currentLineStr, font: NSFont(name: fontName, size: fontSize)!)
-                measureCount += 1
                 if  currentLineWith >= containerWidth * 0.97   {
-                    result.append(currentLine)
+                    result.append((text : currentLine, isTypingLine : hasInput&&hasUninput))
                     strResult.append(currentLineStr)
                     approximateSize = currentLineStr.count-5
                     currentLine = AttributedString("")
                     currentLineStr = ""
-                    
                 }
-            }else {
-                unmeasureCount += 1
             }
             var newChar = AttributedString(String(articleChar))
             if articleIndex < userInputText.count {
+                hasInput = true
                 let userInputChar = userInputText[userInputText.index(userInputText.startIndex, offsetBy: articleIndex)]
                 if articleChar == userInputChar {
                     newChar.backgroundColor = .lightGray
@@ -52,36 +49,37 @@ struct ArticleView: View {
                     newChar.backgroundColor = .red
                 }
             } else {
+                hasUninput = true
                 newChar.backgroundColor = .clear
             }
             currentLine.append(newChar)
             currentLineStr.append(articleChar)
         }
-        result.append(currentLine)
+        result.append((text : currentLine, isTypingLine : hasInput&&hasUninput))
         strResult.append(currentLineStr)
-        print("measureCount: \(measureCount), unmeasureCount: \(unmeasureCount)")
         return result
     }
     
     func measureTextWidth(text: String, font: NSFont) -> CGFloat {
-         let textField = ruler
+        let textField = ruler
         textField.stringValue = text
-         textField.font = font
-         textField.sizeToFit()
-         let width = textField.frame.width
-         return width
-     }
-
+        textField.font = font
+        textField.sizeToFit()
+        let width = textField.frame.width
+        return width
+    }
+    
     var body: some View {
         GeometryReader { geometry in
             ScrollView {
                 ScrollViewReader { scrollView in
                     VStack(alignment: .leading, spacing: 8) {
                         ForEach(Array(formattedTextLines.enumerated()), id: \.offset) { _, line in
-                            Text(line)
+                            Text(line.text)
                                 .font(.custom(fontName, size: fontSize))
                                 .padding(.leading, 0)
                                 .frame(maxWidth: .infinity, alignment: .leading)
+                                .id(line.isTypingLine ? "typingLine" : nil) // 根据条件设置 id
                         }
                     }
                     .frame(maxWidth: .infinity)
@@ -89,6 +87,10 @@ struct ArticleView: View {
                         containerWidth = geometry.size.width - 20
                     }.onChange(of: geometry.size.width) { newWidth in
                         containerWidth = newWidth - 20
+                    }.onChange(of: currentRecord.realInput) { _ in
+                        withAnimation {
+                            scrollView.scrollTo("typingLine", anchor: .center)
+                        }
                     }
                 }
             }

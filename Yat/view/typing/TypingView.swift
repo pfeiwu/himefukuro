@@ -21,18 +21,38 @@ struct TypingView: NSViewRepresentable {
         currentArticleCon.article
     }
     
-    public var nsView = YatNSTextView()
+    public var nsView = YatNSTextView(frame: .zero)
     
     
     @Environment(\.modelContext) private var modelContext
     
-    func makeNSView(context: Context) -> NSTextView {
+    func makeNSView(context: Context) -> NSScrollView {
+        let scrollView = NSScrollView()
+        
+        // 配置 NSTextView
         nsView.delegate = context.coordinator
         nsView.font = NSFont(name: "LXGW Wenkai", size: 30)
-        return nsView
+        nsView.isEditable = true
+        nsView.isRichText = false
+        nsView.importsGraphics = false
+        nsView.isVerticallyResizable = true
+        nsView.isHorizontallyResizable = false  // 设置为 false，以便视图不会水平扩展
+        nsView.autoresizingMask = [.width]  // 自动调整宽度
+        
+        // 设置 NSTextView 的容器视图 NSScrollView
+        scrollView.documentView = nsView
+        scrollView.hasVerticalScroller = true
+        scrollView.autohidesScrollers = true
+        
+        // 设置 NSTextView 的文本容器以支持换行
+        nsView.textContainer?.containerSize = NSMakeSize(scrollView.bounds.width, CGFloat.infinity)
+        nsView.textContainer?.widthTracksTextView = true  // 宽度跟踪文本视图的宽度
+        nsView.textContainer?.heightTracksTextView = false  // 高度不跟踪文本视图的高度
+        
+        return scrollView
     }
-    func updateNSView(_ nsView: NSTextView, context: Context) {
-
+    func updateNSView(_ nsView: NSScrollView, context: Context) {
+        
     }
     
     @State public var lastConfirmedText:String = ""

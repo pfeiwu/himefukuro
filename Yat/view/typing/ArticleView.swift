@@ -49,12 +49,20 @@ struct ArticleView: View {
         return result
     }
     
-    var body: some View{
-        VStack(spacing: 0){
-            Text(formattedText)
-                .font(.custom("LXGW Wenkai", size: 30))
-                .frame(maxWidth: .infinity, alignment: .leading)
-        }
+    var body: some View {
+          ScrollView {
+              VStack(alignment: .leading) {
+                  Text(formattedText)
+                      .font(.custom("LXGW Wenkai", size: 30))
+                      .padding(.top, 10) // 顶部留空
+                      .padding(.leading, 10) // 左侧留空
+                      .frame(maxWidth: .infinity, alignment: .leading) // 水平方向填满, 内容左对齐
+              }
+              .frame(maxWidth: .infinity)
+              
+          }
+          .frame(maxWidth: .infinity, maxHeight: .infinity) // ScrollView填满整个父视图
+          .background(Color.blue) // 背景色设为蓝色
     }
     
 }

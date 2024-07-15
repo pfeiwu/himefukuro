@@ -1,68 +1,99 @@
-//
-//  ArticleView.swift
-//  Yat
-//
-//  Created by Pengfei Wu on 2024/7/12.
-//
-
-import Foundation
 import SwiftUI
-import SwiftData
 
 struct ArticleView: View {
-    
     @Environment(ArticleContainer.self) private var currentArticleCon: ArticleContainer
-    
     @Environment(Record.self) private var currentRecord: Record
     
-    @Environment(AttributeContainer.self) private var attributeCon
+    
+    @State private var containerWidth: CGFloat = 0
+    
+    @State private var fontSize: CGFloat = 30
+    
+    @State private var fontName: String = "LXGW Wenkai"
+    
+    private var ruler = NSTextField(labelWithString: "")
     
     private var currentArticle: Article {
         currentArticleCon.article
     }
     
-    var formattedText: AttributedString {
-//        let correctAttributeCon = AttributeContainer(
-//            foregroundColor: .black,
-//            backgroundColor: .clear
-//        )
+    var formattedTextLines: [AttributedString] {
         let articleText = currentArticle.content
-        var result = AttributedString("")
+        var result :[AttributedString] = []
+        var strResult :[String] = []
         let userInputText = currentRecord.realInput
+        
+        var currentLine = AttributedString("")
+        var currentLineStr = ""
+        var approximateSize = 0
+        var measureCount = 0
+        var unmeasureCount = 0
         for (articleIndex, articleChar) in articleText.enumerated() {
+            if currentLineStr.count >= approximateSize {
+                let currentLineWith = measureTextWidth(text: currentLineStr, font: NSFont(name: fontName, size: fontSize)!)
+                measureCount += 1
+                if  currentLineWith >= containerWidth * 0.97   {
+                    result.append(currentLine)
+                    strResult.append(currentLineStr)
+                    approximateSize = currentLineStr.count-5
+                    currentLine = AttributedString("")
+                    currentLineStr = ""
+                    
+                }
+            }else {
+                unmeasureCount += 1
+            }
             var newChar = AttributedString(String(articleChar))
             if articleIndex < userInputText.count {
                 let userInputChar = userInputText[userInputText.index(userInputText.startIndex, offsetBy: articleIndex)]
                 if articleChar == userInputChar {
-                    // 正确的输入
                     newChar.backgroundColor = .lightGray
                 } else {
-                    // 错误的输入
                     newChar.backgroundColor = .red
                 }
             } else {
-                // 用户输入比文章短,剩余部分显示为未输入
                 newChar.backgroundColor = .clear
             }
-            result.append(newChar)
+            currentLine.append(newChar)
+            currentLineStr.append(articleChar)
         }
+        result.append(currentLine)
+        strResult.append(currentLineStr)
+        print("measureCount: \(measureCount), unmeasureCount: \(unmeasureCount)")
         return result
     }
     
+    func measureTextWidth(text: String, font: NSFont) -> CGFloat {
+         let textField = ruler
+        textField.stringValue = text
+         textField.font = font
+         textField.sizeToFit()
+         let width = textField.frame.width
+         return width
+     }
+
     var body: some View {
-          ScrollView {
-              VStack(alignment: .leading) {
-                  Text(formattedText)
-                      .font(.custom("LXGW Wenkai", size: 30))
-                      .padding(.top, 10) // 顶部留空
-                      .padding(.leading, 10) // 左侧留空
-                      .frame(maxWidth: .infinity, alignment: .leading) // 水平方向填满, 内容左对齐
-              }
-              .frame(maxWidth: .infinity)
-              
-          }
-          .frame(maxWidth: .infinity, maxHeight: .infinity) // ScrollView填满整个父视图
-          .background(Color.blue) // 背景色设为蓝色
+        GeometryReader { geometry in
+            ScrollView {
+                ScrollViewReader { scrollView in
+                    VStack(alignment: .leading, spacing: 8) {
+                        ForEach(Array(formattedTextLines.enumerated()), id: \.offset) { _, line in
+                            Text(line)
+                                .font(.custom(fontName, size: fontSize))
+                                .padding(.leading, 0)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                    .onAppear {
+                        containerWidth = geometry.size.width - 20
+                    }.onChange(of: geometry.size.width) { newWidth in
+                        containerWidth = newWidth - 20
+                    }
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
     }
     
 }

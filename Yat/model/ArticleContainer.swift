@@ -66,16 +66,18 @@ class ArticleContainer {
         
     }
     
+    private static let typoAttributes: [NSAttributedString.Key: Any] = [.backgroundColor: NSColor.red]
+    private static let typedAttributes: [NSAttributedString.Key: Any] = [.backgroundColor: NSColor.lightGray]
+    private static let untypedAttributes: [NSAttributedString.Key: Any] = [.backgroundColor: NSColor.clear]
+    
+    
     // paint the text with diff color according to user input
     private func paint(range: NSRange) {
-        let typoAttributes: [NSAttributedString.Key: Any] = [.backgroundColor: NSColor.red]
-        let typedAttributes: [NSAttributedString.Key: Any] = [.backgroundColor: NSColor.lightGray]
-        let untypedAttributes: [NSAttributedString.Key: Any] = [.backgroundColor: NSColor.clear]
         
         let startIndex = range.location
         let endIndex = range.location + range.length
         
-        var currentLineIndex = typingLine
+        var currentLineIndex = 0
         var currentLineOffset = 0
         
         for i in startIndex..<endIndex {
@@ -84,7 +86,7 @@ class ArticleContainer {
                 currentLineOffset += rendered[currentLineIndex].length
                 currentLineIndex += 1
                 if currentLineIndex >= rendered.count - 1 {
-                    currentLineOffset += rendered[currentLineIndex - 1 ].length - 1
+//                    currentLineOffset += rendered[currentLineIndex - 1].length - 1
                     break
                 }
             }
@@ -93,27 +95,25 @@ class ArticleContainer {
             
             let lineCharIndex = i - currentLineOffset
             
-            print("cuurentLineIndex: \(currentLineIndex), currentLineOffset: \(currentLineOffset), lineCharIndex: \(lineCharIndex) i：\(i)")
+                        print("cuurentLineIndex: \(currentLineIndex), currentLineOffset: \(currentLineOffset), lineCharIndex: \(lineCharIndex) i：\(i)")
             // paint the char
             if i < lastInput.count {
                 
                 if lastInput[lastInput.index(lastInput.startIndex, offsetBy: i)] == article.content[article.content.index(article.content.startIndex, offsetBy: i)] {
                     // typed
-                    rendered[currentLineIndex].addAttributes(typedAttributes, range: NSRange(location: lineCharIndex, length: 1))
+                    rendered[currentLineIndex].addAttributes(ArticleContainer.typedAttributes, range: NSRange(location: lineCharIndex, length: 1))
                 } else {
                     // typo
-                    rendered[currentLineIndex].addAttributes(typoAttributes, range: NSRange(location: lineCharIndex, length: 1))
+                    rendered[currentLineIndex].addAttributes(ArticleContainer.typoAttributes, range: NSRange(location: lineCharIndex, length: 1))
                 }
+                typingLine = currentLineIndex
             } else {
                 // untyped
-                rendered[currentLineIndex].addAttributes(untypedAttributes, range: NSRange(location: lineCharIndex, length: 1))
+                rendered[currentLineIndex].addAttributes(ArticleContainer.untypedAttributes, range: NSRange(location: lineCharIndex, length: 1))
             }
         }
         // update typingLine mark
-        while typingLine < rendered.count && lastInput.count > currentLineOffset + rendered[typingLine].length {
-            currentLineOffset += rendered[typingLine].length
-            typingLine += 1
-        }
+        
     }
     
     public func render(containerWidth: CGFloat) {

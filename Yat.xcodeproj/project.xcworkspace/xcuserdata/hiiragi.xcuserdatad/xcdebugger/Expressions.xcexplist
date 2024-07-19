@@ -50,6 +50,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "ArticleContainer.renderWithInput(userInput:):ArticleContainer.swift">
+      </ContextState>
+      <ContextState
          contextName = "Record.stringify():Record.swift">
          <PersistentStrings>
             <PersistentString
@@ -138,6 +141,9 @@
             </PersistentString>
             <PersistentString
                value = "article">
+            </PersistentString>
+            <PersistentString
+               value = "rendered[currentLineIndex - 1].length">
             </PersistentString>
             <PersistentString
                value = "rendered[currentLineIndex].length">

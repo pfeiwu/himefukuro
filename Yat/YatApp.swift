@@ -10,8 +10,9 @@ import SwiftData
 
 @main
 struct YatApp: App {
-    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
+    //用Delegate就不能载文了，
+//    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+//    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Article.self,

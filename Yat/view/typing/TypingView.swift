@@ -63,28 +63,21 @@ struct TypingView: NSViewRepresentable {
             print("已经结束辣！")
             return
         }
-        print("typing正在使用的文章是\(currentArticle.id), 记录是\(currentRecord.id)")
         // update the input content with the new textview string
         let currentConfirmedText = getConfirmedText(from: nsView)
         let countDiff = currentConfirmedText.count - lastConfirmedText.count
         if countDiff < 0 {
-            print("currentConfirmedText: \(currentConfirmedText), lastConfirmedText: \(lastConfirmedText),countDiff: \(countDiff)")
             currentRecord.revision -= countDiff
         }else {
             let newInput = currentConfirmedText.suffix(countDiff)
-            print("newInput: \(newInput)")
             let trimmedString = newInput.trimmingCharacters(in: .punctuationCharacters)
             if trimmedString.count > 1 {
-                print("word input: \(trimmedString)")
                 currentRecord.wordCount += trimmedString.count
             }
         }
         
         currentRecord.realInput = currentConfirmedText
         lastConfirmedText = currentConfirmedText
-        
-        print("realInput: \(currentRecord.realInput)")
-        print(RecordUtil.genRecordStr(record: currentRecord, article: currentArticle))
         
         // 当用户输入长度和文章长度相同且最后一个字符相同时，判断输入结束
         if currentRecord.realInput.count == currentArticle.content.count {
@@ -110,13 +103,11 @@ struct TypingView: NSViewRepresentable {
     func getConfirmedText(from textView: NSTextView) -> String {
         let imeMarkedRange = textView.markedRange()
         let string = textView.string
-        print("imeMarkedRange: \(imeMarkedRange), string: \(string)")
         
         if imeMarkedRange.length > 0 {
             // 存在输入法未确定的编码部分
             let confirmedRange = NSRange(location: 0, length: imeMarkedRange.location)
-            let confirmedText = string.substring(with: Range(confirmedRange, in: string)!)
-            return confirmedText
+            return string.substring(with: Range(confirmedRange, in: string)!)
         } else {
             // 没有输入法未确定的编码部分，返回完整的文本内容
             return string
@@ -137,7 +128,6 @@ struct TypingView: NSViewRepresentable {
         case .typing:
             break
         }
-        print("keyDown: \(event.keyCode)")
         if let characters = event.characters {
             var convertedCode = "☒"
             if characters == " " {
@@ -148,10 +138,10 @@ struct TypingView: NSViewRepresentable {
                 convertedCode = characters
             }
             currentRecord.addKeystroke(key: convertedCode)
-            print("convertedCode：\(convertedCode), keystrokes: \(currentRecord.inputCode)")
         }
     }
     public func reset(){
+        currentArticleCon.reset()
         nsView.string=""
         lastConfirmedText = ""
         attributeCon.state = .ready

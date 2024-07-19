@@ -73,7 +73,9 @@ struct SpeedometerView: View {
                 self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
                     if (attributeCon.state == .typing){
                         currentRecord.timeConsumedInSec += 0.1
+                      
                     }
+                    
                 })
             })
             .padding()

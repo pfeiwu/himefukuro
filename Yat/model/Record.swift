@@ -15,6 +15,7 @@ class Record {
     // the unique identifier
     var id: UUID
     
+    // whether record the entire typing process
     var finished: Bool
     
     // when the record was created
@@ -29,8 +30,8 @@ class Record {
     // the input code from user in raw, _ for space, ⌫ for backspace
     var inputCode: String
     
+    // the actual content that user input
     var realInput: String
-    
     
     // AKA 打词
     var wordCount: Int = 0
@@ -40,6 +41,12 @@ class Record {
     
     // AKA 错字
     var typo: Int = 0
+    
+    var maxSpeed : Double = 0
+    
+    var maxKeystroke : Double = 0   
+    
+    var minaverageCodeLength: Double = 100
     
     
     // AKA 速度
@@ -57,7 +64,7 @@ class Record {
     // AKA 键准
     var accuracy: Double {
         guard keystrokeTotal > 0 else { return 0 }
-        return (Double(keystrokeTotal - backspace) - Double(revision) * averageCodeLength)/Double(keystrokeTotal)
+        return (Double(keystrokeTotal - backspace) - Double(revision + typo) * averageCodeLength)/Double(keystrokeTotal)
     }
     
     // AKA 码长
@@ -74,7 +81,7 @@ class Record {
     
     // AKA 打词率
     var wordRate: Double {
-        return Double(wordCount) / Double(inputCode.count) * 100
+        return Double(wordCount) / Double(realInput.count) * 100
     }
     
     // AKA 字数
@@ -113,6 +120,8 @@ class Record {
         self.inputCode = inputCode
         self.realInput = realInput
     }
+    
+    
     
     public func reset(){
         timestamp = Date()

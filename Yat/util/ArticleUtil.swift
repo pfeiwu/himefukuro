@@ -33,7 +33,7 @@ class ArticleUtil {
     }
     
     private static func findParaNum(raw: String) -> Int {
-        let pattern = "-第(\\d+)段-"
+        let pattern = "-第(\\d+)段"
         let regex = try? NSRegularExpression(pattern: pattern)
         if let match = regex?.firstMatch(in: raw, range: NSRange(raw.startIndex..., in: raw)),
            let range = Range(match.range(at: 1), in: raw) {
@@ -61,7 +61,7 @@ class ArticleUtil {
     }
     
     private static func findContent(raw: String, title: String, paraNum: Int) -> String {
-        let pattern = "\(title).*?-第\(paraNum)段-"
+        let pattern = "\(title).*?-第\(paraNum)段"
         let regex = try? NSRegularExpression(pattern: pattern, options: .dotMatchesLineSeparators)
         if let match = regex?.firstMatch(in: raw, range: NSRange(raw.startIndex..., in: raw)),
            let range = Range(match.range, in: raw) {
@@ -73,4 +73,7 @@ class ArticleUtil {
         }
         return raw
     }
+    
+    
+ 
 }

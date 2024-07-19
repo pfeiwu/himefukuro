@@ -29,6 +29,8 @@
 		A0C54E692C45364500BB5F9F /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C54E682C45364500BB5F9F /* WindowManager.swift */; };
 		A0C54E6B2C45365F00BB5F9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C54E6A2C45365F00BB5F9F /* AppDelegate.swift */; };
 		A0C54E702C4536BA00BB5F9F /* LocalPostingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C54E6F2C4536BA00BB5F9F /* LocalPostingView.swift */; };
+		A0C54E722C47BCD500BB5F9F /* TextWidthRuler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C54E712C47BCD500BB5F9F /* TextWidthRuler.swift */; };
+		A0C54E742C4A344F00BB5F9F /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C54E732C4A344F00BB5F9F /* TextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,8 @@
 		A0C54E682C45364500BB5F9F /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 		A0C54E6A2C45365F00BB5F9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0C54E6F2C4536BA00BB5F9F /* LocalPostingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPostingView.swift; sourceTree = "<group>"; };
+		A0C54E712C47BCD500BB5F9F /* TextWidthRuler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextWidthRuler.swift; sourceTree = "<group>"; };
+		A0C54E732C4A344F00BB5F9F /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +195,7 @@
 			children = (
 				A01D5E862C4187A8007E9836 /* ArticleUtil.swift */,
 				A0C54E4F2C43BD8700BB5F9F /* RecordUtil.swift */,
+				A0C54E712C47BCD500BB5F9F /* TextWidthRuler.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -203,6 +208,7 @@
 				A01D5E702C41252D007E9836 /* TypingView.swift */,
 				A01D5E722C4125AB007E9836 /* SpeedometerView.swift */,
 				A01D5E7C2C414015007E9836 /* YatNSTextView.swift */,
+				A0C54E732C4A344F00BB5F9F /* TextView.swift */,
 			);
 			path = typing;
 			sourceTree = "<group>";
@@ -352,6 +358,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0C54E722C47BCD500BB5F9F /* TextWidthRuler.swift in Sources */,
 				A0C54E502C43BD8700BB5F9F /* RecordUtil.swift in Sources */,
 				A01D5E6A2C4124A5007E9836 /* SettingView.swift in Sources */,
 				A01D5E3C2C41221A007E9836 /* MainView.swift in Sources */,
@@ -368,6 +375,7 @@
 				A0C54E522C43CB9300BB5F9F /* ArticleContainer.swift in Sources */,
 				A01D5E712C41252D007E9836 /* TypingView.swift in Sources */,
 				A0C54E542C43CEF800BB5F9F /* AttributeContainer.swift in Sources */,
+				A0C54E742C4A344F00BB5F9F /* TextView.swift in Sources */,
 				A0C54E692C45364500BB5F9F /* WindowManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

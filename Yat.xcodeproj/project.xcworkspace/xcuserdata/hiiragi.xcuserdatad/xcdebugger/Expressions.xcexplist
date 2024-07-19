@@ -3,51 +3,6 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "static RecordUtil.genRecordStr(record:article:):RecordUtil.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "article.title">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "TypingView.paste(_:):TypingView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "newArticle.title">
-            </PersistentString>
-            <PersistentString
-               value = "newArticle.paraNum">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "TypingGroupView.currentRecord.getter:TypingGroupView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "newRecord.article">
-            </PersistentString>
-            <PersistentString
-               value = "currentArticle.records">
-            </PersistentString>
-            <PersistentString
-               value = "activeRecords">
-            </PersistentString>
-            <PersistentString
-               value = "(Record(article:self.currentArticle)).article">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "TypingView.keyDown(with:):TypingView.swift">
-      </ContextState>
-      <ContextState
-         contextName = "TypingView.Coordinator.textDidChange(_:):TypingView.swift">
-      </ContextState>
-      <ContextState
-         contextName = "TypingView.textDidChange():TypingView.swift">
-      </ContextState>
-      <ContextState
          contextName = "Record.article.getter:@__swiftmacro_3Yat6RecordC7article18_PersistedPropertyfMa_.swift">
          <PersistentStrings>
             <PersistentString
@@ -56,16 +11,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #2 in SpeedometerleView.body.getter:SpeedometerView.swift">
+         contextName = "TypingView.textDidChange():TypingView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "TypingGroupView.newReocrd():TypingGroupView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.currentRecord.timeConsumedInSec">
-            </PersistentString>
-            <PersistentString
-               value = "self.currentRecord">
-            </PersistentString>
-            <PersistentString
-               value = "self.currentRecord.inputCode">
+               value = "activeRecords">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -73,38 +25,27 @@
          contextName = "ArticleView.formattedText.getter:ArticleView.swift">
       </ContextState>
       <ContextState
-         contextName = "TypingData.init(article:userInput:):TypingData.swift">
+         contextName = "closure #1 in MainView.body.getter:MainView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "article.title">
+               value = "AttributeModel()">
+            </PersistentString>
+            <PersistentString
+               value = "attributeCon">
+            </PersistentString>
+            <PersistentString
+               value = " attributeCon">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "TypingView.Coordinator.getConfirmedText(from:):TypingView.swift">
-      </ContextState>
-      <ContextState
-         contextName = "TypingData.article.getter:@__swiftmacro_3Yat10TypingDataC7article18_PersistedPropertyfMa_.swift">
-      </ContextState>
-      <ContextState
-         contextName = "TypingGroupView.currentArticle.getter:TypingGroupView.swift">
+         contextName = "TypingView.keyDown(with:):TypingView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "activeArticles.last">
+               value = "attributeCon">
             </PersistentString>
             <PersistentString
-               value = "activeRecords.last">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "YatNSTextView.keyDown(with:):YatNSTextView.swift">
-      </ContextState>
-      <ContextState
-         contextName = "TypingGroupView.newReocrd():TypingGroupView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "activeRecords">
+               value = "attributeCon.state">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -129,6 +70,126 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in closure #2 in SpeedometerleView.body.getter:SpeedometerView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.currentRecord.timeConsumedInSec">
+            </PersistentString>
+            <PersistentString
+               value = "self.currentRecord">
+            </PersistentString>
+            <PersistentString
+               value = "self.currentRecord.inputCode">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TypingView.paste(_:):TypingView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "newArticle.title">
+            </PersistentString>
+            <PersistentString
+               value = "newArticle.paraNum">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TypingGroupView.currentArticle.getter:TypingGroupView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "activeArticles.last">
+            </PersistentString>
+            <PersistentString
+               value = "activeRecords.last">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "YatNSTextView.keyDown(with:):YatNSTextView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "TypingData.init(article:userInput:):TypingData.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "article.title">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AppDelegate.applicationDidFinishLaunching(_:):AppDelegate.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "appMenuItem?.submenu?">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ArticleContainer.paint(range:):ArticleContainer.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "article.content.count">
+            </PersistentString>
+            <PersistentString
+               value = "rendered">
+            </PersistentString>
+            <PersistentString
+               value = "lastInput.count">
+            </PersistentString>
+            <PersistentString
+               value = "article">
+            </PersistentString>
+            <PersistentString
+               value = "rendered[currentLineIndex].length">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TypingData.article.getter:@__swiftmacro_3Yat10TypingDataC7article18_PersistedPropertyfMa_.swift">
+      </ContextState>
+      <ContextState
+         contextName = "TypingGroupView.currentRecord.getter:TypingGroupView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "newRecord.article">
+            </PersistentString>
+            <PersistentString
+               value = "currentArticle.records">
+            </PersistentString>
+            <PersistentString
+               value = "activeRecords">
+            </PersistentString>
+            <PersistentString
+               value = "(Record(article:self.currentArticle)).article">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TypingView.Coordinator.getConfirmedText(from:):TypingView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #2 in closure #1 in SpeedometerView.body.getter:SpeedometerView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = " currentRecord.timeConsumedInSec">
+            </PersistentString>
+            <PersistentString
+               value = " currentRecord">
+            </PersistentString>
+            <PersistentString
+               value = "currentRecord.timeConsumedInSec">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static RecordUtil.genRecordStr(record:article:):RecordUtil.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "article.title">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "TypingView.Coordinator.textView(_:shouldChangeTextIn:replacementString:):TypingView.swift">
          <PersistentStrings>
             <PersistentString
@@ -144,6 +205,9 @@
                value = "self.parent.currentRecord.realInput">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TypingView.Coordinator.textDidChange(_:):TypingView.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

@@ -41,6 +41,8 @@ class RecordUtil {
         return "键准\(String(format: "%.2f%%", record.accuracy * 100))"
     }
     
+
+    
     static public func contentLengthSegment(article: Article) -> String {
         return "字数\(article.content.count)"
     }
@@ -67,7 +69,7 @@ class RecordUtil {
     }
     
     static public func verSegment() -> String {
-        return "鸺鹠 dev"
+        return "鸺鹠dev"
     }
     
     

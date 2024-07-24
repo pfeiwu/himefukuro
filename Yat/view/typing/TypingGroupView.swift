@@ -16,15 +16,9 @@ struct TypingGroupView: View {
     
     @Environment(AttributeContainer.self) private var attributeCon
     
-    @Query(
-        filter: #Predicate<Article> { $0.isActive == true },
-        sort: \Article.timestamp,
-        order: .reverse
-    ) private var activeArticles: [Article]
-    
     @State private var currentRecord: Record = Record(article : Article())
     
-    @State private var currentArticleCon: ArticleContainer = ArticleContainer(article: Article())
+    @State private var currentArticleCon: ArticleContainer = ArticleContainer.shared
     
     @State private var typingState: TypingState = .ready
     
@@ -49,19 +43,9 @@ struct TypingGroupView: View {
                 .environment(attributeCon)
                 .frame(minHeight: 50, maxHeight: 50)
                 .padding()
-        }
-        .onChange(of: activeArticles){
-            if let lastArticle = activeArticles.first {
-                currentArticleCon.article = lastArticle
-                currentRecord.reset()
-                print("发现载文，载文title是\(lastArticle.title)")
-            }
         }.onAppear(){
-            if let lastArticle = activeArticles.first {
-                currentArticleCon.article = lastArticle
-                currentRecord.articleId = lastArticle.id
-                currentRecord.reset()
-            }
+            ArticleContainer.inject(modelContext: modelContext)
+            ArticleContainer.loadArticleFromHistory()
         }
         .onChange(of:typingState){
             print("typingState变为\(typingState)")

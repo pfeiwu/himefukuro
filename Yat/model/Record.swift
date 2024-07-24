@@ -113,7 +113,6 @@ class Record {
         let id = UUID()
         self.id = id
         self.articleId = article.id
-        print("我是\(id)，我正在使用的文章是\(article.title)")
         self.finished = false
         self.timeConsumedInSec = timeConsumedInSec
         self.timestamp = timestamp

@@ -11,15 +11,18 @@ import UniformTypeIdentifiers
 import AppKit
 struct TypingView: NSViewRepresentable {
     
-    @Environment(ArticleContainer.self) private var currentArticleCon: ArticleContainer
     
     @Environment(Record.self) private var currentRecord: Record
     
     @Environment(AttributeContainer.self) private var attributeCon: AttributeContainer
     
+    @State private var currentArticleCon: ArticleContainer = ArticleContainer.shared
+    
     private var currentArticle: Article {
         currentArticleCon.article
     }
+    
+    private var lastArticleHash: Int = 0
     
     public var nsView = YatNSTextView(frame: .zero)
     
@@ -44,11 +47,19 @@ struct TypingView: NSViewRepresentable {
         scrollView.hasVerticalScroller = true
         scrollView.autohidesScrollers = true
         
+        nsView.becomeFirstResponder()
+        
         // 设置 NSTextView 的文本容器以支持换行
         nsView.textContainer?.containerSize = NSMakeSize(scrollView.bounds.width, CGFloat.infinity)
         nsView.textContainer?.widthTracksTextView = true  // 宽度跟踪文本视图的宽度
         nsView.textContainer?.heightTracksTextView = false  // 高度不跟踪文本视图的高度
         
+        // 当文章变化时，重置输入
+        ArticleContainer.registerCallback{
+            reset()
+            // 后面放到recordManager里去
+            currentRecord.reset()
+        }
         return scrollView
     }
     func updateNSView(_ nsView: NSScrollView, context: Context) {
@@ -141,7 +152,6 @@ struct TypingView: NSViewRepresentable {
         }
     }
     public func reset(){
-        currentArticleCon.reset()
         nsView.string=""
         lastConfirmedText = ""
         attributeCon.state = .ready
@@ -156,10 +166,7 @@ struct TypingView: NSViewRepresentable {
                 }
             }
             let newArticle = ArticleUtil.articleFromRaw(raw: pasteboardText)
-            newArticle.activate()
-            currentArticle.deactivate()
-            modelContext.insert(newArticle)
-            reset()
+            ArticleContainer.loadArticle(article: newArticle)
         }
     }
     

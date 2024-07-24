@@ -7,9 +7,53 @@
 
 import Foundation
 import SwiftUI
+import SwiftData
 
 @Observable
 class ArticleContainer {
+    
+    public static let shared = ArticleContainer(article: Article())
+    
+    
+    private var modelContext: ModelContext?
+    
+    
+    static func inject(modelContext: ModelContext) {
+        shared.modelContext = modelContext
+    }
+    
+    static func loadArticle(article: Article) {
+        shared.article = article
+        shared.reset()
+        shared.modelContext?.insert(article)
+    }
+    
+    static func loadArticleFromHistory() {
+        var historyArticlesDescr = FetchDescriptor<Article>(
+            sortBy: [
+                .init(\Article.timestamp, order: .reverse)
+            ]
+        )
+        historyArticlesDescr.fetchLimit = 1
+        shared.article = try! shared.modelContext?.fetch(historyArticlesDescr).first ?? Article()
+        shared.reset()
+    }
+    
+    public typealias Callback = () -> Void
+    
+    private var callbacks: [Callback] = []
+     
+    public static func registerCallback(_ callback: @escaping Callback) {
+        shared.callbacks.append(callback)
+    }
+    
+    
+    public func reset() {
+           lastInput = ""
+           typingLine = 0
+           callbacks.forEach { $0() }
+       }
+    
     public var article:Article
     
     public var rendered:[NSMutableAttributedString]=[]
@@ -33,10 +77,7 @@ class ArticleContainer {
     
     private var typingLine: Int = 0
     
-    public func reset(){
-        lastInput = ""
-        typingLine = 0
-    }
+  
     
     
     // update the style of rendered article in response to user input
@@ -95,7 +136,7 @@ class ArticleContainer {
             
             let lineCharIndex = i - currentLineOffset
             
-                        print("cuurentLineIndex: \(currentLineIndex), currentLineOffset: \(currentLineOffset), lineCharIndex: \(lineCharIndex) i：\(i)")
+            print("cuurentLineIndex: \(currentLineIndex), currentLineOffset: \(currentLineOffset), lineCharIndex: \(lineCharIndex) i：\(i)")
             // paint the char
             if i < lastInput.count {
                 

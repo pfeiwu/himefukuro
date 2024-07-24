@@ -12,6 +12,7 @@ import AppKit
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         setupMenu()
+        PermissionsService.acquireAccessibilityPrivileges()
     }
     
     func setupMenu() {
@@ -38,16 +39,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // 将应用菜单添加到主菜单
         mainMenu.addItem(appMenuItem)
         
-        // 创建"发文"菜单
-        let postMenu = NSMenu(title: "发文")
-        let postMenuItem = NSMenuItem(title: "发文", action: nil, keyEquivalent: "")
+        // 创建"载文"菜单
+        let postMenu = NSMenu(title: "载文")
+        let postMenuItem = NSMenuItem(title: "载文", action: nil, keyEquivalent: "")
         postMenuItem.submenu = postMenu
         
-        // 创建"本地发文"菜单项
-        let sendTextItem = NSMenuItem(title: "本地发文", action: #selector(openLocalPosting), keyEquivalent: ",")
-        postMenu.addItem(sendTextItem)
+        // 创建"本地载文"菜单项
+        let sendTextItem = NSMenuItem(title: "本地载文", action: #selector(openLocalPosting), keyEquivalent: "5")
         
-        // 将"发文"菜单添加到主菜单
+        // 创建“从剪贴板载文”菜单项
+        let sendClipboardItem = NSMenuItem(title: "从剪贴板载文", action: #selector(NSText.paste(_:)), keyEquivalent: "v")
+     
+        // 创建“从QQ载文“菜单项
+        let sendQQItem = NSMenuItem(title: "从QQ载文", action: #selector(loadFromQQ), keyEquivalent: "4")
+        
+        postMenu.addItem(sendTextItem)
+        postMenu.addItem(sendClipboardItem)
+        postMenu.addItem(sendQQItem)
+        
+        // 将"载文"菜单添加到主菜单
         mainMenu.addItem(postMenuItem)
         
         // 设置应用程序的主菜单
@@ -56,5 +66,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc func openLocalPosting() {
         WindowManager.shared.showLocalPostingWindow()
+    }
+    
+    @objc func loadFromQQ(){
+        let articleStr = QQAuxiliaryTool.shared.readFromActiveWindow()
+        let article = ArticleUtil.articleFromRaw(raw: articleStr)
+        ArticleContainer.loadArticle(article: article)
     }
 }

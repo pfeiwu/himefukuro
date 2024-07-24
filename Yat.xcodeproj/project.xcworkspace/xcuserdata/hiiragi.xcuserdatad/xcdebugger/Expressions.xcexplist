@@ -22,6 +22,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #3 in TypingGroupView.body.getter:TypingGroupView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "attributeCon">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ArticleView.formattedText.getter:ArticleView.swift">
       </ContextState>
       <ContextState
@@ -87,17 +95,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "TypingView.paste(_:):TypingView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "newArticle.title">
-            </PersistentString>
-            <PersistentString
-               value = "newArticle.paraNum">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "TypingGroupView.currentArticle.getter:TypingGroupView.swift">
          <PersistentStrings>
             <PersistentString
@@ -110,6 +107,17 @@
       </ContextState>
       <ContextState
          contextName = "YatNSTextView.keyDown(with:):YatNSTextView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "TypingView.paste(_:):TypingView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "newArticle.title">
+            </PersistentString>
+            <PersistentString
+               value = "newArticle.paraNum">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "TypingData.init(article:userInput:):TypingData.swift">
@@ -199,16 +207,24 @@
          contextName = "TypingView.Coordinator.textView(_:shouldChangeTextIn:replacementString:):TypingView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "textView.string">
+               value = "">
             </PersistentString>
             <PersistentString
-               value = "">
+               value = "textView.string">
             </PersistentString>
             <PersistentString
                value = "self.parent.currentArticle.records">
             </PersistentString>
             <PersistentString
                value = "self.parent.currentRecord.realInput">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AppDelegate.validateMenuItem(_:):AppDelegate.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "menuItem.action">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

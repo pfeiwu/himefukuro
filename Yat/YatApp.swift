@@ -10,9 +10,11 @@ import SwiftData
 
 @main
 struct YatApp: App {
-    //用Delegate就不能载文了，
-//    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-//    
+ 
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
+    private var permissionsService = PermissionsService()
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Article.self,
@@ -28,10 +30,15 @@ struct YatApp: App {
     }()
 
     var body: some Scene {
+       
         WindowGroup {
             MainView()
+                .onAppear(perform: self.permissionsService.pollAccessibilityPrivileges)
+                
         }
+        
         .modelContainer(sharedModelContainer)
+        
     }
     
     init(){

@@ -7,6 +7,8 @@
 
 import Foundation
 import AppKit
+import ApplicationServices
+import Cocoa
 
 class QQAuxiliaryTool{
     
@@ -36,19 +38,19 @@ class QQAuxiliaryTool{
         if err == .success {
             exploreElement(level:0,windowElement as! AXUIElement) { element,level in
                 var roleValue: AnyObject?
-                              AXUIElementCopyAttributeValue(element, kAXRoleDescriptionAttribute as CFString, &roleValue)
-                              if let role = roleValue as? String {
-                                  if role == "text" {
-                                      var valueValue: AnyObject?
-                                      AXUIElementCopyAttributeValue(element, kAXValueAttribute as CFString, &valueValue)
-                                      if let value = valueValue as? String {
-                                          // 目前发现激活窗口的聊天记录在第19级，QQ更新后，可能会变化
-                                          if value.contains("-第") && level >= 19{
-                                                articleRawTextCandidates.append(value)
-                                          }
-                                      }
-                                  }
-                              }
+                AXUIElementCopyAttributeValue(element, kAXRoleDescriptionAttribute as CFString, &roleValue)
+                if let role = roleValue as? String {
+                    if role == "text" {
+                        var valueValue: AnyObject?
+                        AXUIElementCopyAttributeValue(element, kAXValueAttribute as CFString, &valueValue)
+                        if let value = valueValue as? String {
+                            // 目前发现激活窗口的聊天记录在第19级，QQ更新后，可能会变化
+                            if value.contains("-第") && level >= 19{
+                                articleRawTextCandidates.append(value)
+                            }
+                        }
+                    }
+                }
             }
             print("发现了\(articleRawTextCandidates.count)个疑似赛文文本")
             print(articleRawTextCandidates)
@@ -67,9 +69,31 @@ class QQAuxiliaryTool{
     // 向当前QQ激活窗口发送文本
     func sendMsgToActiveWindow(message: String){
         print("向QQ发送文本：\(message)")
+        
+        let appElement = AXUIElementCreateApplication(pid)
+        AXUIElementSetAttributeValue(appElement, kAXFrontmostAttribute as CFString, true as CFTypeRef)
+        // 模拟键盘事件来执行粘贴操作
+        let keyDownEvent = CGEvent(keyboardEventSource: nil, virtualKey: 0x09, keyDown: true)
+        keyDownEvent?.flags = .maskCommand
+        keyDownEvent?.post(tap: .cghidEventTap)
+        
+        let keyUpEvent = CGEvent(keyboardEventSource: nil, virtualKey: 0x09, keyDown: false)
+        keyUpEvent?.flags = .maskCommand
+        keyUpEvent?.post(tap: .cghidEventTap)
+        usleep(100000) // 暂停100毫秒
+        // 模拟回车键的按下和释放
+        let enterKeyDownEvent = CGEvent(keyboardEventSource: nil, virtualKey: 0x24, keyDown: true)
+        enterKeyDownEvent?.post(tap: .cghidEventTap)
+        // 获取当前应用程序的进程标识符 (PID)
+        let currentAppPID = NSRunningApplication.current.processIdentifier
+        
+        usleep(100000) // 暂停100毫秒
+        // 使用 Accessibility API 将当前应用程序重新置为前台
+        let currentProcess = AXUIElementCreateApplication(currentAppPID)
+        AXUIElementSetAttributeValue(currentProcess, kAXFrontmostAttribute as CFString, true as CFTypeRef)
     }
     
-   
+    
     
     private func exploreElement(level: Int,_ element: AXUIElement, _ processElement: (AXUIElement,Int) -> Void) {
         // 处理当前元素

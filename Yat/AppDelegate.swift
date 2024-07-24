@@ -53,12 +53,30 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // 创建“从QQ载文“菜单项
         let sendQQItem = NSMenuItem(title: "从QQ载文", action: #selector(loadFromQQ), keyEquivalent: "4")
         
+        postMenu.addItem(sendQQItem)
         postMenu.addItem(sendTextItem)
         postMenu.addItem(sendClipboardItem)
-        postMenu.addItem(sendQQItem)
+        
+        
+        let functionMenu = NSMenu(title: "功能")
+        let functionMenuItem = NSMenuItem(title: "功能", action: nil, keyEquivalent: "")
+        
+        functionMenuItem.submenu = functionMenu
+        
+        // 创建重打菜单项
+        let resetMenuItem = NSMenuItem(title: "重打", action: #selector(retype), keyEquivalent: "3")
+        
+        // 创建乱序菜单项
+        let shuffleMenuItem = NSMenuItem(title:"乱序", action: #selector(shuffle), keyEquivalent: "l")
+        
+        functionMenu.addItem(resetMenuItem)
+        functionMenu.addItem(shuffleMenuItem)
         
         // 将"载文"菜单添加到主菜单
         mainMenu.addItem(postMenuItem)
+        
+        // 将"功能"菜单添加到主菜单
+        mainMenu.addItem(functionMenuItem)
         
         // 设置应用程序的主菜单
         NSApplication.shared.mainMenu = mainMenu
@@ -69,8 +87,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func loadFromQQ(){
-        let articleStr = QQAuxiliaryTool.shared.readFromActiveWindow()
-        let article = ArticleUtil.articleFromRaw(raw: articleStr)
-        ArticleManager.loadArticle(article: article)
+        ActionManager.shared.loadFromQQ()
+    }
+    
+    @objc func retype(){
+        ActionManager.shared.retype()
+    }
+    
+    @objc func shuffle(){
+        ActionManager.shared.shuffle()
     }
 }

@@ -25,7 +25,17 @@ class RecordManager{
     }
     
     static func save(){
+        // 将成绩放到剪贴板
+        let recordStr = RecordUtil.genRecordStr(record: shared.currentRecord, article: ArticleManager.shared.article)
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(recordStr, forType: .string)
+        // 保存
         shared.modelContext?.insert(shared.currentRecord)
+        // 非潜水模式下，发送到QQ窗口
+        if !StateManager.shared.silent{
+            let recordStr = RecordUtil.genRecordStr(record: shared.currentRecord, article: ArticleManager.shared.article)
+            QQAuxiliaryTool.shared.sendMsgToActiveWindow(message:recordStr)
+        }
     }
     
     static func inject(modelContext: ModelContext) {

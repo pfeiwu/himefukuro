@@ -26,6 +26,8 @@ class Article {
     // the paragraph number of the article
     var paraNum: Int
     
+    var retype: Int
+    
     // hash of the content
     var contentHash: Int {
         return content.hashValue
@@ -35,13 +37,15 @@ class Article {
     init(timestamp: Date=Date(),
          content:String="暂无赛文",
          title:String="暂无赛文",
-         paraNum:Int=1
+         paraNum:Int=1,
+         retype:Int=0
     ) {
         self.id = UUID()
         self.timestamp = timestamp
         self.content = content
         self.title=title
         self.paraNum=paraNum
+        self.retype=0
     }
     
     // get label of this article for display

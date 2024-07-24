@@ -73,7 +73,6 @@ struct TypingView: NSViewRepresentable {
         if stateManager.typingState == .finished {
             nsView.string = String(currentRecord.realInput.prefix(currentArticle.content.count))
             print("已经结束辣！")
-            RecordManager.save()
             return
         }
         // update the input content with the new textview string
@@ -95,19 +94,19 @@ struct TypingView: NSViewRepresentable {
         // 当用户输入长度和文章长度相同且最后一个字符相同时，判断输入结束
         if currentRecord.realInput.count == currentArticle.content.count {
             if currentRecord.realInput.last == currentArticle.content.last {
-                
+                // 计算错字
                 var typo = 0
                 for (inputChar, contentChar) in zip(currentRecord.realInput, currentArticle.content) {
                     if inputChar != contentChar {
                         typo += 1
                     }
                 }
-                stateManager.typingState = .finished
+                
                 currentRecord.typo = typo
-                // 将成绩放到剪贴板
-                let recordStr = RecordUtil.genRecordStr(record: currentRecord, article: currentArticle)
-                NSPasteboard.general.clearContents()
-                NSPasteboard.general.setString(recordStr, forType: .string)
+                
+                // 标记跟打状态为完成
+                stateManager.typingState = .finished
+                RecordManager.save()
             }
         }
     }

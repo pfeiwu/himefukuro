@@ -24,7 +24,7 @@ class ArticleManager {
     
     static func loadArticle(article: Article) {
         shared.article = article
-        shared.reset()
+//        shared.reset()
         shared.modelContext?.insert(article)
     }
     
@@ -42,6 +42,8 @@ class ArticleManager {
     public typealias Callback = () -> Void
     
     private var callbacks: [Callback] = []
+    
+    private var currentContainerWidth:CGFloat = 0.0
      
     public static func registerCallback(_ callback: @escaping Callback) {
         shared.callbacks.append(callback)
@@ -53,6 +55,11 @@ class ArticleManager {
            typingLine = 0
            callbacks.forEach { $0() }
        }
+    
+    public func retype() {
+        article.retype += 1
+        render(containerWidth:currentContainerWidth)
+    }
     
     public var article:Article
     
@@ -158,6 +165,7 @@ class ArticleManager {
     
     public func render(containerWidth: CGFloat) {
         reset()
+        currentContainerWidth = containerWidth
         let articleText = article.content
         var result: [NSMutableAttributedString] = []
         var currentLineStr = ""

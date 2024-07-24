@@ -22,6 +22,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "QQAuxiliaryTool.readFromActiveWindow():QQAuxiliaryTool.swift">
+      </ContextState>
+      <ContextState
          contextName = "closure #3 in TypingGroupView.body.getter:TypingGroupView.swift">
          <PersistentStrings>
             <PersistentString
@@ -165,7 +168,7 @@
          contextName = "TypingGroupView.currentRecord.getter:TypingGroupView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "newRecord.article">
+               value = "(Record(article:self.currentArticle)).article">
             </PersistentString>
             <PersistentString
                value = "currentArticle.records">
@@ -174,7 +177,7 @@
                value = "activeRecords">
             </PersistentString>
             <PersistentString
-               value = "(Record(article:self.currentArticle)).article">
+               value = "newRecord.article">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -188,10 +191,26 @@
                value = " currentRecord.timeConsumedInSec">
             </PersistentString>
             <PersistentString
-               value = " currentRecord">
+               value = "currentRecord.timeConsumedInSec">
             </PersistentString>
             <PersistentString
-               value = "currentRecord.timeConsumedInSec">
+               value = " currentRecord">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ArticleManager.updateInput(userInput:):ArticleManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "lastInput">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in variable initialization expression of YatApp.sharedModelContainer:YatApp.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "URL.applicationSupportDirectory">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

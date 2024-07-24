@@ -66,7 +66,7 @@ class QQAuxiliaryTool{
     
     // 向当前QQ激活窗口发送文本
     func sendMsgToActiveWindow(message: String){
-        
+        print("向QQ发送文本：\(message)")
     }
     
    

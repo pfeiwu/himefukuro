@@ -25,6 +25,7 @@ struct YatApp: App {
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])
         } catch {
+            print(URL.applicationSupportDirectory.path(percentEncoded: false))
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()

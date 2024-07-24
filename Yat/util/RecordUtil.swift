@@ -16,7 +16,7 @@ class RecordUtil {
     }
     
     static public func genRecordSegStr(record: Record, article: Article) ->String {
-        return "\(speedSegment(record: record)) \(keystrokePerSecSegment(record: record)) \(typoSegment(record: record)) \(averageCodeLengthSegment(record: record)) \(accuracySegment(record: record)) \(contentLengthSegment(article: article)) \(timeConsumedSegment(record: record)) \(revisionSegment(record: record)) \(backspaceSegment(record: record)) \(wordRateSegment(record: record)) \(verSegment())"
+        return "\(speedSegment(record: record)) \(keystrokePerSecSegment(record: record)) \(typoSegment(record: record)) \(averageCodeLengthSegment(record: record)) \(accuracySegment(record: record)) \(contentLengthSegment(article: article)) \(timeConsumedSegment(record: record)) \(revisionSegment(record: record)) \(backspaceSegment(record: record)) \(wordRateSegment(record: record)) \(retypeSegment(article: article)) \(verSegment())"
     }
     
     static public func speedSegment(record: Record) -> String {
@@ -66,6 +66,10 @@ class RecordUtil {
     
     static public func typoSegment(record: Record) -> String {
         return "错字\(record.typo)"
+    }
+    
+    static public func retypeSegment(article: Article) -> String {
+        return "重打\(article.retype)"
     }
     
     static public func verSegment() -> String {

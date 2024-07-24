@@ -46,6 +46,33 @@ struct TypingGroupView: View {
             ArticleManager.loadArticleFromHistory()
             
             RecordManager.inject(modelContext: modelContext)
+        }.contextMenu{
+            Toggle(isOn: $stateManager.silent) {
+                Text("潜水")
+            }
+            Divider()
+            Button(action: {
+                ActionManager.shared.loadFromQQ()
+            }) {
+                Text("从QQ载文")
+            }
+            Button(action: {
+                NSApp.sendAction(#selector(NSText.paste(_:)), to: nil, from: nil)
+            }) {
+                Text("从剪切板载文")
+            }
+            Button(action: {
+                WindowManager.shared.showLocalPostingWindow()
+            }) {
+                Text("本地载文")
+            }
+            Divider()
+            
+            Button(action: {
+                WindowManager.shared.showLocalPostingWindow()
+            }) {
+                Text("重打")
+            }
         }
     }
 }

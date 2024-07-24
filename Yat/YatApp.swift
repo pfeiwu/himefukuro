@@ -31,10 +31,15 @@ struct YatApp: App {
 
     var body: some Scene {
        
-        WindowGroup {
+        WindowGroup() {
             MainView()
                 .onAppear(perform: self.permissionsService.pollAccessibilityPrivileges)
-                
+        }
+        .onChange(of: StateManager.shared.titleString) { newValue in
+            print("titleString changed to \(newValue)")
+            if let window = NSApplication.shared.windows.first {
+                    window.title = newValue
+                }
         }
         
         .modelContainer(sharedModelContainer)

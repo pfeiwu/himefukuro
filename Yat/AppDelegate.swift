@@ -71,6 +71,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc func loadFromQQ(){
         let articleStr = QQAuxiliaryTool.shared.readFromActiveWindow()
         let article = ArticleUtil.articleFromRaw(raw: articleStr)
-        ArticleContainer.loadArticle(article: article)
+        ArticleManager.loadArticle(article: article)
     }
 }

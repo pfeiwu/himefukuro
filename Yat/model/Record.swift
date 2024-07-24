@@ -25,7 +25,7 @@ class Record {
     var timeConsumedInSec: Double
     
     // the article that was typed
-    var articleId: UUID
+    var articleId: UUID?
     
     // the input code from user in raw, _ for space, ⌫ for backspace
     var inputCode: String
@@ -44,7 +44,7 @@ class Record {
     
     var maxSpeed : Double = 0
     
-    var maxKeystroke : Double = 0   
+    var maxKeystroke : Double = 0
     
     var minaverageCodeLength: Double = 100
     
@@ -106,13 +106,13 @@ class Record {
     init(
         timestamp: Date = Date(),
         timeConsumedInSec: Double = 0.0,
-        article: Article,
+        articleId: UUID? = nil,
         inputCode: String = "",
         realInput: String = ""
     ) {
         let id = UUID()
         self.id = id
-        self.articleId = article.id
+        self.articleId = articleId
         self.finished = false
         self.timeConsumedInSec = timeConsumedInSec
         self.timestamp = timestamp

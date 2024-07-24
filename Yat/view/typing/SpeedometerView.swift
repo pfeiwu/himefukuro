@@ -10,14 +10,22 @@ import SwiftUI
 
 struct SpeedometerView: View {
     
-    @Environment(ArticleContainer.self) private var currentArticleCon: ArticleContainer
+    @State private var articleManager: ArticleManager = ArticleManager.shared
     
-    @Environment(Record.self) private var currentRecord: Record
+    @State private var recordManager: RecordManager = RecordManager.shared
     
-    @Environment(AttributeContainer.self) private var attributeCon: AttributeContainer
+    @State  private var stateManager: StateManager = StateManager.shared
+    
+    private var currentArticle: Article {
+        articleManager.article
+    }
+    
+    private var currentRecord: Record {
+        recordManager.currentRecord
+    }
     
     private var progress: Double {
-        Double(currentRecord.realInput.count) / Double(currentArticleCon.article.content.count)
+        Double(currentRecord.realInput.count) / Double(currentArticle.content.count)
     }
     
     private var barColor: Color {
@@ -52,10 +60,7 @@ struct SpeedometerView: View {
     }
 
 
-    
-    private var currentArticle: Article {
-        currentArticleCon.article
-    }
+   
     
     // timer by 100ms
     @State private var timer: Timer?
@@ -71,9 +76,8 @@ struct SpeedometerView: View {
             .frame(height: 6)
             .onAppear(perform: {
                 self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
-                    if (attributeCon.state == .typing){
+                    if (stateManager.typingState == .typing){
                         currentRecord.timeConsumedInSec += 0.1
-                      
                     }
                     
                 })

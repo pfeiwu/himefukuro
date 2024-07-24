@@ -14,41 +14,38 @@ struct TypingGroupView: View {
     
     @Environment(\.modelContext) private var modelContext
     
-    @Environment(AttributeContainer.self) private var attributeCon
     
-    @State private var currentRecord: Record = Record(article : Article())
+    @State  private var stateManager: StateManager = StateManager.shared
     
-    @State private var currentArticleCon: ArticleContainer = ArticleContainer.shared
+    @State  private var articleManager: ArticleManager = ArticleManager.shared
     
-    @State private var typingState: TypingState = .ready
+    @State  private var recordManager: RecordManager = RecordManager.shared
     
+    
+    private var currentArticle: Article {
+        articleManager.article
+    }
+    
+    private var currentRecord: Record {
+        recordManager.currentRecord
+    }
     
     var body: some View {
         VStack(spacing: 0) {
             ArticleView()
-                .environment(currentRecord)
-                .environment(currentArticleCon)
-                .environment(attributeCon)
                 .frame(maxHeight: .infinity)
                 .padding()
             Spacer()
             SpeedometerView()
-                .environment(currentRecord)
-                .environment(currentArticleCon)
-                .environment(attributeCon)
                 .frame(minHeight: 10, maxHeight: 10)
             TypingView()
-                .environment(currentRecord)
-                .environment(currentArticleCon)
-                .environment(attributeCon)
                 .frame(minHeight: 50, maxHeight: 50)
                 .padding()
         }.onAppear(){
-            ArticleContainer.inject(modelContext: modelContext)
-            ArticleContainer.loadArticleFromHistory()
-        }
-        .onChange(of:typingState){
-            print("typingState变为\(typingState)")
+            ArticleManager.inject(modelContext: modelContext)
+            ArticleManager.loadArticleFromHistory()
+            
+            RecordManager.inject(modelContext: modelContext)
         }
     }
 }

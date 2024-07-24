@@ -10,13 +10,11 @@ import SwiftData
 
 struct MainView: View {
     @Environment(\.modelContext) private var modelContext
-   
-    @State private var attributeCon: AttributeContainer = AttributeContainer()
+
     
     var body: some View {
         VStack {
             TypingGroupView()
-                .environment(attributeCon)
         }
     }
 }

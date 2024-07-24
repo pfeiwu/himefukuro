@@ -11,15 +11,18 @@ import UniformTypeIdentifiers
 import AppKit
 struct TypingView: NSViewRepresentable {
     
+    @State  private var stateManager: StateManager = StateManager.shared
     
-    @Environment(Record.self) private var currentRecord: Record
+    @State private var articleManager: ArticleManager = ArticleManager.shared
     
-    @Environment(AttributeContainer.self) private var attributeCon: AttributeContainer
-    
-    @State private var currentArticleCon: ArticleContainer = ArticleContainer.shared
+    @State private var recordManager: RecordManager = RecordManager.shared
     
     private var currentArticle: Article {
-        currentArticleCon.article
+        articleManager.article
+    }
+    
+    private var currentRecord: Record {
+        recordManager.currentRecord
     }
     
     private var lastArticleHash: Int = 0
@@ -55,10 +58,8 @@ struct TypingView: NSViewRepresentable {
         nsView.textContainer?.heightTracksTextView = false  // 高度不跟踪文本视图的高度
         
         // 当文章变化时，重置输入
-        ArticleContainer.registerCallback{
+        ArticleManager.registerCallback{
             reset()
-            // 后面放到recordManager里去
-            currentRecord.reset()
         }
         return scrollView
     }
@@ -69,9 +70,10 @@ struct TypingView: NSViewRepresentable {
     @State public var lastConfirmedText:String = ""
     
     func textDidChange(){
-        if attributeCon.state == .finished {
+        if stateManager.typingState == .finished {
             nsView.string = String(currentRecord.realInput.prefix(currentArticle.content.count))
             print("已经结束辣！")
+            RecordManager.save()
             return
         }
         // update the input content with the new textview string
@@ -100,7 +102,7 @@ struct TypingView: NSViewRepresentable {
                         typo += 1
                     }
                 }
-                attributeCon.state = .finished
+                stateManager.typingState = .finished
                 currentRecord.typo = typo
                 // 将成绩放到剪贴板
                 let recordStr = RecordUtil.genRecordStr(record: currentRecord, article: currentArticle)
@@ -130,11 +132,11 @@ struct TypingView: NSViewRepresentable {
     }
     
     public func keyDown(with event: NSEvent){
-        switch attributeCon.state {
+        switch stateManager.typingState {
         case .finished:
             return
         case .pause, .ready:
-            attributeCon.state = .typing
+            stateManager.typingState = .typing
             break
         case .typing:
             break
@@ -154,7 +156,7 @@ struct TypingView: NSViewRepresentable {
     public func reset(){
         nsView.string=""
         lastConfirmedText = ""
-        attributeCon.state = .ready
+        stateManager.typingState = .ready
     }
     
     public func paste(_ sender: Any?){
@@ -166,7 +168,7 @@ struct TypingView: NSViewRepresentable {
                 }
             }
             let newArticle = ArticleUtil.articleFromRaw(raw: pasteboardText)
-            ArticleContainer.loadArticle(article: newArticle)
+            ArticleManager.loadArticle(article: newArticle)
         }
     }
     

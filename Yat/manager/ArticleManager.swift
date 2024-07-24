@@ -10,9 +10,9 @@ import SwiftUI
 import SwiftData
 
 @Observable
-class ArticleContainer {
+class ArticleManager {
     
-    public static let shared = ArticleContainer(article: Article())
+    public static let shared = ArticleManager(article: Article())
     
     
     private var modelContext: ModelContext?
@@ -136,21 +136,20 @@ class ArticleContainer {
             
             let lineCharIndex = i - currentLineOffset
             
-            print("cuurentLineIndex: \(currentLineIndex), currentLineOffset: \(currentLineOffset), lineCharIndex: \(lineCharIndex) i：\(i)")
             // paint the char
             if i < lastInput.count {
                 
                 if lastInput[lastInput.index(lastInput.startIndex, offsetBy: i)] == article.content[article.content.index(article.content.startIndex, offsetBy: i)] {
                     // typed
-                    rendered[currentLineIndex].addAttributes(ArticleContainer.typedAttributes, range: NSRange(location: lineCharIndex, length: 1))
+                    rendered[currentLineIndex].addAttributes(ArticleManager.typedAttributes, range: NSRange(location: lineCharIndex, length: 1))
                 } else {
                     // typo
-                    rendered[currentLineIndex].addAttributes(ArticleContainer.typoAttributes, range: NSRange(location: lineCharIndex, length: 1))
+                    rendered[currentLineIndex].addAttributes(ArticleManager.typoAttributes, range: NSRange(location: lineCharIndex, length: 1))
                 }
                 typingLine = currentLineIndex
             } else {
                 // untyped
-                rendered[currentLineIndex].addAttributes(ArticleContainer.untypedAttributes, range: NSRange(location: lineCharIndex, length: 1))
+                rendered[currentLineIndex].addAttributes(ArticleManager.untypedAttributes, range: NSRange(location: lineCharIndex, length: 1))
             }
         }
         // update typingLine mark

@@ -1,18 +1,18 @@
 import SwiftUI
 
 struct ArticleView: View {
-    @Environment(ArticleContainer.self) private var currentArticleCon: ArticleContainer
-    @Environment(Record.self) private var currentRecord: Record
+    @State  private var articleManager: ArticleManager = ArticleManager.shared
     
+    @State  private var recordManager: RecordManager = RecordManager.shared
     
     var body: some View {
         GeometryReader { geometry in
             ScrollView {
                 ScrollViewReader { scrollView in
                     VStack(alignment: .leading, spacing: 8) {
-                        ForEach(Array(currentArticleCon.renderWithInput(userInput: currentRecord.realInput).enumerated()), id: \.offset) { _, line in
+                        ForEach(Array(articleManager.renderWithInput(userInput: recordManager.currentRecord.realInput).enumerated()), id: \.offset) { _, line in
                             Text(AttributedString(line.text))
-                                .font(.custom(currentArticleCon.fontName, size: currentArticleCon.fontSize))
+                                .font(.custom(articleManager.fontName, size: articleManager.fontSize))
                                 .padding(.leading, 0)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .id(line.isTypingLine ? "typingLine" : nil)
@@ -20,15 +20,15 @@ struct ArticleView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .onAppear {
-                        currentArticleCon.render(containerWidth:geometry.size.width - 20)
+                        articleManager.render(containerWidth:geometry.size.width - 20)
                     }
-                    .onChange(of: geometry.size.width) { newWidth in
-                        currentArticleCon.render(containerWidth:geometry.size.width - 20)
+                    .onChange(of: geometry.size.width) { newWidth,_ in
+                        articleManager.render(containerWidth:geometry.size.width - 20)
                     }
-                    .onChange(of: currentArticleCon.article) { newWidth in
-                        currentArticleCon.render(containerWidth:geometry.size.width - 20)
+                    .onChange(of: articleManager.article) { newWidth,_ in
+                        articleManager.render(containerWidth:geometry.size.width - 20)
                     }
-                    .onChange(of: currentRecord.realInput) { _ in
+                    .onChange(of: recordManager.currentRecord.realInput) {
                         withAnimation {
                             scrollView.scrollTo("typingLine", anchor: .center)
                         }

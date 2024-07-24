@@ -67,9 +67,11 @@ class QQAuxiliaryTool{
     }
     
     // 向当前QQ激活窗口发送文本
+    // 向当前QQ激活窗口发送文本
     func sendMsgToActiveWindow(message: String){
         print("向QQ发送文本：\(message)")
-        
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(message, forType: .string)
         let appElement = AXUIElementCreateApplication(pid)
         AXUIElementSetAttributeValue(appElement, kAXFrontmostAttribute as CFString, true as CFTypeRef)
         // 模拟键盘事件来执行粘贴操作
@@ -80,14 +82,33 @@ class QQAuxiliaryTool{
         let keyUpEvent = CGEvent(keyboardEventSource: nil, virtualKey: 0x09, keyDown: false)
         keyUpEvent?.flags = .maskCommand
         keyUpEvent?.post(tap: .cghidEventTap)
+        
         usleep(100000) // 暂停100毫秒
         // 模拟回车键的按下和释放
         let enterKeyDownEvent = CGEvent(keyboardEventSource: nil, virtualKey: 0x24, keyDown: true)
+        
+        let enterKeyUpEvent = CGEvent(keyboardEventSource: nil, virtualKey: 0x24, keyDown: false)
+        
+        enterKeyDownEvent?.flags = .maskNonCoalesced
+        enterKeyUpEvent?.flags = .maskNonCoalesced
+        
+        
         enterKeyDownEvent?.post(tap: .cghidEventTap)
+        usleep(100000) // 暂停100毫秒
+        enterKeyUpEvent?.post(tap: .cghidEventTap)
+        
+        enterKeyDownEvent?.post(tap: .cghidEventTap)
+        usleep(100000) // 暂停100毫秒
+        enterKeyUpEvent?.post(tap: .cghidEventTap)
+        
+        enterKeyDownEvent?.post(tap: .cghidEventTap)
+        usleep(100000) // 暂停100毫秒
+        enterKeyUpEvent?.post(tap: .cghidEventTap)
+        
         // 获取当前应用程序的进程标识符 (PID)
         let currentAppPID = NSRunningApplication.current.processIdentifier
         
-        usleep(100000) // 暂停100毫秒
+        usleep(500000) // 暂停100毫秒
         // 使用 Accessibility API 将当前应用程序重新置为前台
         let currentProcess = AXUIElementCreateApplication(currentAppPID)
         AXUIElementSetAttributeValue(currentProcess, kAXFrontmostAttribute as CFString, true as CFTypeRef)

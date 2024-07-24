@@ -46,6 +46,7 @@ struct TypingGroupView: View {
             ArticleManager.loadArticleFromHistory()
             
             RecordManager.inject(modelContext: modelContext)
+            BookManager.inject(modelContext: modelContext)
         }.contextMenu{
             Toggle(isOn: $stateManager.silent) {
                 Text("潜水")
@@ -69,7 +70,7 @@ struct TypingGroupView: View {
             Divider()
             
             Button(action: {
-                WindowManager.shared.showLocalPostingWindow()
+                ActionManager.shared.retype()
             }) {
                 Text("重打")
             }

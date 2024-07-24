@@ -27,6 +27,7 @@ class WindowManager {
             let hostingController = NSHostingController(rootView: contentView)
             let window = NSWindow(contentViewController: hostingController)
             window.center()
+            window.setContentSize(NSSize(width: 800, height: 600))
             window.title = "本地发文"
             localPostingWindow = window
         }

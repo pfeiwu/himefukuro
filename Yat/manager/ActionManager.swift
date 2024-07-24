@@ -32,4 +32,8 @@ class ActionManager:NSObject{
     
     @objc func paste(){
     }
+    
+    @objc func postToQQ(){
+        
+    }
 }

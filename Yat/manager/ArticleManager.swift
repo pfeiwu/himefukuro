@@ -163,6 +163,8 @@ class ArticleManager {
         
     }
     
+   
+    
     public func render(containerWidth: CGFloat) {
         reset()
         currentContainerWidth = containerWidth

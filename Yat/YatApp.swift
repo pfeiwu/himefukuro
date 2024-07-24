@@ -18,7 +18,8 @@ struct YatApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Article.self,
-            Record.self
+            Record.self,
+            Book.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

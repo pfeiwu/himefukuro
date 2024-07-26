@@ -1,6 +1,16 @@
 ## 简介
-这是一个基于SwiftUI&SwiftData开发的跟打器，正在积极开发中，目前已实现剪切板载文功能，将将可用。
+这是一个基于SwiftUI&SwiftData开发的跟打器，作为我学习Swift的一个小作业，目前正在积极开发中。
 
-由于使用了SwiftData，要求MacOS版本>=14
+由于使用了SwiftData的新API，要求MacOS版本>=14 （Sonoma）
 
-这是我第一次使用Swift，有的地方写得不太好;）
+需安装LXGW Wenkai字体 （后面实现配置功能后，会允许修改字体）
+
+目前可以从QQ、剪贴板、或本地文件中读取文章，然后进行跟打
+
+
+![image](./example/typer_01.png)
+
+
+
+
+

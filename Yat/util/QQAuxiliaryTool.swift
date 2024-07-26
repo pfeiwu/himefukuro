@@ -22,15 +22,17 @@ class QQAuxiliaryTool{
         findQQWindow()
     }
     
-    private func findQQWindow(){
+    private func findQQWindow() {
         if let app = NSWorkspace.shared.runningApplications.first(where: { $0.localizedName == appName }) {
             pid = app.processIdentifier
             print("PID of \(appName): \(pid)")
+            let appElement = AXUIElementCreateApplication(pid)
+            AXUIElementSetAttributeValue(appElement, "AXManualAccessibility" as CFString, kCFBooleanTrue)
         }
     }
     
     // 从当前QQ激活窗口读取文本
-    func readFromActiveWindow()->String{
+    func readFromActiveWindow(retry:Bool = false)->String{
         let appElement = AXUIElementCreateApplication(pid)
         var windowElement: AnyObject?
         let err = AXUIElementCopyAttributeValue(appElement, kAXFocusedWindowAttribute as CFString, &windowElement)
@@ -39,18 +41,15 @@ class QQAuxiliaryTool{
             exploreElement(level:0,windowElement as! AXUIElement) { element,level in
                 var roleValue: AnyObject?
                 AXUIElementCopyAttributeValue(element, kAXRoleDescriptionAttribute as CFString, &roleValue)
-                if let role = roleValue as? String {
-                    print("\(level) : \(role)")
-                    if role == "text" {
-                        var valueValue: AnyObject?
-                        AXUIElementCopyAttributeValue(element, kAXValueAttribute as CFString, &valueValue)
-                        if let value = valueValue as? String {
-                            print("\(level) : \(value)")
-                            // 目前发现激活窗口的聊天记录在第19级，QQ更新后，可能会变化
-                            if value.contains("-第") && level >= 19{
-                                articleRawTextCandidates.append(value)
-                            }
-                        }
+                let role = getRole(element: element)
+                if role == "text" {
+                    var valueValue: AnyObject?
+                    AXUIElementCopyAttributeValue(element, kAXValueAttribute as CFString, &valueValue)
+                    let value = getValue(element: element)
+                    print("Text From QQ: (\(level)) : \(value)")
+                    // 目前发现激活窗口的聊天记录在第19级，QQ更新后，可能会变化
+                    if  level >= 19 && value.contains("-第") && value.split(separator: "\n").count == 3 {
+                        articleRawTextCandidates.append(value)
                     }
                 }
             }
@@ -62,11 +61,16 @@ class QQAuxiliaryTool{
                 return articleRawTextCandidates[0]
             }
         }else{
-            return "未发现QQ窗口或无法读取，请确认QQ窗口是否正常运行，且给本应用赋予了辅助功能权限"
+            if retry{
+                return "未发现QQ窗口或无法读取，请确认QQ窗口是否正常运行，且给本应用赋予了辅助功能权限"
+            }
+            findQQWindow()
+            return readFromActiveWindow(retry: true)
         }
     }
     
-    // 向当前QQ激活窗口发送文本
+    
+    
     // 向当前QQ激活窗口发送文本
     func sendMsgToActiveWindow(message: String){
         print("向QQ发送文本：\(message)")
@@ -114,20 +118,47 @@ class QQAuxiliaryTool{
         AXUIElementSetAttributeValue(currentProcess, kAXFrontmostAttribute as CFString, true as CFTypeRef)
     }
     
-    
-    
-    private func exploreElement(level: Int,_ element: AXUIElement, _ processElement: (AXUIElement,Int) -> Void) {
+    private func exploreElement(level: Int, _ element: AXUIElement, _ processElement: (AXUIElement, Int) -> Void) {
         // 处理当前元素
-        processElement(element,level)
-        let newlevel:Int = level+1
-        // 获取子元素
+        processElement(element, level)
+        let newLevel: Int = level + 1
+        let children = getChildren(element: element)
+        for child in children {
+            // 递归处理子元素
+            exploreElement(level: newLevel, child, processElement)
+        }
+        
+    }
+    
+    
+    private func getRole(element:AXUIElement)->String {
+        var roleValue: AnyObject?
+        AXUIElementCopyAttributeValue(element, kAXRoleDescriptionAttribute as CFString, &roleValue)
+        if let role = roleValue as? String {
+            return role
+        }
+        return ""
+    }
+    
+    private func getValue(element:AXUIElement)->String {
+        var valueValue: AnyObject?
+        AXUIElementCopyAttributeValue(element, kAXValueAttribute as CFString, &valueValue)
+        if let value = valueValue as? String {
+            return value
+        }
+        return ""
+    }
+    
+    private func getChildren(element:AXUIElement)->[AXUIElement] {
         var childrenValue: AnyObject?
         let err = AXUIElementCopyAttributeValue(element, kAXChildrenAttribute as CFString, &childrenValue)
         if err == .success, let children = childrenValue as? [AXUIElement] {
-            for child in children {
-                // 递归处理子元素
-                exploreElement(level:newlevel, child, processElement)
-            }
+            return children
         }
+        return []
     }
+     
+    
 }
+
+

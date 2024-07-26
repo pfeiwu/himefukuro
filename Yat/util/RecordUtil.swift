@@ -73,7 +73,7 @@ class RecordUtil {
     }
     
     static public func verSegment() -> String {
-        return "鸺鹠dev"
+        return "鸺鹠v"+(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String)
     }
     
     

@@ -276,5 +276,51 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7705B188-5E7D-4876-892C-7108C9750957"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Yat/util/ArticleUtil.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "findContent(raw:title:paraNum:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "7705B188-5E7D-4876-892C-7108C9750957 - 42b6f496538662d2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static &#x9e3a;&#x9e60;.ArticleUtil.findContent(raw: Swift.String, title: Swift.String, paraNum: Swift.Int) -&gt; Swift.String"
+                  moduleName = "&#x9e3a;&#x9e60;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hiiragi/newYat/Yat/Yat/util/ArticleUtil.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "67"
+                  endingLineNumber = "67">
+               </Location>
+               <Location
+                  uuid = "7705B188-5E7D-4876-892C-7108C9750957 - 42b6f496538662d2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static &#x9e3a;&#x9e60;.ArticleUtil.findContent(raw: Swift.String, title: Swift.String, paraNum: Swift.Int) -&gt; Swift.String"
+                  moduleName = "&#x9e3a;&#x9e60;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hiiragi/newYat/Yat/Yat/util/ArticleUtil.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "67"
+                  endingLineNumber = "67">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

@@ -39,6 +39,11 @@ class ArticleManager {
         shared.reset()
     }
     
+    static func welcomeArticle() {
+        shared.article = Article(content:"⌘+v从剪切板载文，⌘+4从QQ载文，⌘+3重打；文本区域右键打开上下文菜单",title: "鸺鹠跟打器使用说明")
+        shared.reset()
+    }
+    
     public typealias Callback = () -> Void
     
     private var callbacks: [Callback] = []

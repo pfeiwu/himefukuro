@@ -40,10 +40,12 @@ class QQAuxiliaryTool{
                 var roleValue: AnyObject?
                 AXUIElementCopyAttributeValue(element, kAXRoleDescriptionAttribute as CFString, &roleValue)
                 if let role = roleValue as? String {
+                    print("\(level) : \(role)")
                     if role == "text" {
                         var valueValue: AnyObject?
                         AXUIElementCopyAttributeValue(element, kAXValueAttribute as CFString, &valueValue)
                         if let value = valueValue as? String {
+                            print("\(level) : \(value)")
                             // 目前发现激活窗口的聊天记录在第19级，QQ更新后，可能会变化
                             if value.contains("-第") && level >= 19{
                                 articleRawTextCandidates.append(value)
@@ -55,15 +57,13 @@ class QQAuxiliaryTool{
             print("发现了\(articleRawTextCandidates.count)个疑似赛文文本")
             print(articleRawTextCandidates)
             if articleRawTextCandidates.isEmpty{
-                print("未找到赛文文本")
-                return ""
+                return "已读取了QQ窗口，但未发现发文"
             }else{
                 return articleRawTextCandidates[0]
             }
         }else{
-            print("未发现QQ窗口或无法读取，请确认QQ窗口是否正常运行，且给本应用赋予了辅助功能权限")
+            return "未发现QQ窗口或无法读取，请确认QQ窗口是否正常运行，且给本应用赋予了辅助功能权限"
         }
-        return ""
     }
     
     // 向当前QQ激活窗口发送文本

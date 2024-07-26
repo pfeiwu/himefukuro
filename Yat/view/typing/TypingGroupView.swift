@@ -43,7 +43,7 @@ struct TypingGroupView: View {
                 .padding()
         }.onAppear(){
             ArticleManager.inject(modelContext: modelContext)
-            ArticleManager.loadArticleFromHistory()
+            ArticleManager.welcomeArticle()
             
             RecordManager.inject(modelContext: modelContext)
             BookManager.inject(modelContext: modelContext)
